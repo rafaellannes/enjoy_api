@@ -7,6 +7,11 @@ use App\Http\Controllers\Api\{
     NoticiaCategoriaController,
 };
 
+use App\Http\Controllers\Api\Auth\{
+    RegisterController,
+    AuthClientController
+};
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,9 +23,14 @@ use App\Http\Controllers\Api\{
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 //NOTICIAS
-Route::get('noticias', [NoticiaCategoriaController::class, 'index']);
+Route::get('/noticias', [NoticiaCategoriaController::class, 'index']);
+
+//AUTH
+Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/sanctum/token', [AuthClientController::class, 'auth']);
+
+Route::group(['middleware' => ['auth:sanctum', 'OptionalAuthSanctum']], function () {
+    Route::get('/auth/me', [AuthClientController::class, 'me']);
+});
