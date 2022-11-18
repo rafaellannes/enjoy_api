@@ -17,4 +17,14 @@ class NoticiaService
     {
         return $this->noticiaRepository->getNoticiasAtivas();
     }
+
+    public function getNoticia($uuid)
+    {
+        return $this->noticiaRepository->getNoticia($uuid);
+    }
+
+    public function getNoticiasByCategoria($idCategoria)
+    {
+        return $this->noticiaRepository->getNoticiasByCategoria($idCategoria);
+    }
 }

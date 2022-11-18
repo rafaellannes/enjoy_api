@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\{
+    NoticiaCategoriaController,
     NoticiaController,
 };
 
@@ -23,14 +24,24 @@ use App\Http\Controllers\Api\Auth\{
 |
 */
 
+//CATEGORIA-NOTICIA
+Route::get('/categorias-noticias', [NoticiaCategoriaController::class, 'index']);
+//
+
 
 //NOTICIAS
 Route::get('/noticias', [NoticiaController::class, 'index']);
+Route::get('/noticia/{uuid}', [NoticiaController::class, 'show']);
+Route::get('/noticias/categoria/{UuidCategoria}', [NoticiaController::class, 'noticiasByCategoria']);
+//
+
+
 
 //AUTH
 Route::post('/register', [RegisterController::class, 'register']); //Registrar
-Route::post('/sanctum/token', [AuthClientController::class, 'auth']); //Login
+Route::post('/login', [AuthClientController::class, 'auth']); //Login
+//
 
-Route::group(['middleware' => ['auth:sanctum', 'OptionalAuthSanctum']], function () { //Rotas protegidas
+Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegidas
     Route::get('/auth/me', [AuthClientController::class, 'me']);
 });
