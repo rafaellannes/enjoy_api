@@ -15,6 +15,6 @@ class NoticiaRepository
 
     public function getNoticiasAtivas()
     {
-        return $this->noticia->ativos();
+        return $this->noticia->where('ativo', true)->paginate();
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\{
-    NoticiaCategoriaController,
+    NoticiaController,
 };
 
 use App\Http\Controllers\Api\Auth\{
@@ -25,12 +25,12 @@ use App\Http\Controllers\Api\Auth\{
 
 
 //NOTICIAS
-Route::get('/noticias', [NoticiaCategoriaController::class, 'index']);
+Route::get('/noticias', [NoticiaController::class, 'index']);
 
 //AUTH
-Route::post('/register', [RegisterController::class, 'register']);
-Route::post('/sanctum/token', [AuthClientController::class, 'auth']);
+Route::post('/register', [RegisterController::class, 'register']); //Registrar
+Route::post('/sanctum/token', [AuthClientController::class, 'auth']); //Login
 
-Route::group(['middleware' => ['auth:sanctum', 'OptionalAuthSanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'OptionalAuthSanctum']], function () { //Rotas protegidas
     Route::get('/auth/me', [AuthClientController::class, 'me']);
 });

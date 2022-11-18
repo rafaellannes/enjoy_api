@@ -10,10 +10,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Client  extends Authenticatable
 {
-    use HasFactory, TenantTrait, HasApiTokens;
+    use HasFactory, HasApiTokens;
 
     protected $fillable = [
-        'prefeitura_id',
         'name',
         'email',
         'password',
@@ -23,10 +22,4 @@ class Client  extends Authenticatable
         'password',
         'remember_token',
     ];
-
-
-    public function prefeitura()
-    {
-        return $this->belongsTo(Prefeitura::class);
-    }
 }

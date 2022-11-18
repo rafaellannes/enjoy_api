@@ -25,7 +25,7 @@ class Noticia extends Model
         'img' => 'array',
     ];
 
-    /*     public function categoria()
+    public function categoria()
     {
         return $this->belongsTo(NoticiaCategoria::class, 'noticia_categoria_id');
     }
@@ -33,10 +33,5 @@ class Noticia extends Model
     public function prefeitura()
     {
         return $this->belongsTo(Prefeitura::class);
-    } */
-
-    public function ativos()
-    {
-        return $this->where('ativo', true)->paginate();
     }
 }

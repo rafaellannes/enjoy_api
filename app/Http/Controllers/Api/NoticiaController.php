@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Tenant\TenantRequest;
 
 
-class NoticiaCategoriaController extends Controller
+class NoticiaController extends Controller
 {
     protected $noticiaService;
 
@@ -18,7 +18,7 @@ class NoticiaCategoriaController extends Controller
         $this->noticiaService = $noticiaService;
     }
 
-    public function index(/* TenantRequest $request */)
+    public function index(TenantRequest $request)
     {
         $noticias = $this->noticiaService->getNoticiasAtivas();
 

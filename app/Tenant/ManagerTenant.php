@@ -7,10 +7,19 @@ class ManagerTenant
 {
     public function getTenantIdentify()
     {
-         /* dd(auth('sanctum')->check()); */
-       /*  dd(request('uuid')); */
-       /*  return auth('sanctum')->check(); */
-/*         if (auth()->check()) {
+
+        if (request()->has('uuid')) {
+            $prefeitura = \App\Models\Prefeitura::where('uuid', request('uuid'))->first();
+            if ($prefeitura) {
+                return $prefeitura->id;
+            }
+        }
+
+
+        /* dd(auth('sanctum')->check()); */
+        /*  dd(request('uuid')); */
+        /*  return auth('sanctum')->check(); */
+        /*         if (auth()->check()) {
 
             return auth()->user()->prefeitura_id;
         } else {
@@ -22,8 +31,8 @@ class ManagerTenant
         } */
 
 
-         /*  dd(auth()->user()); */
-        return auth()->check() ? auth()->user()->prefeitura_id : '';
+        /*  dd(auth()->user()); */
+        // return auth()->check() ? auth()->user()->prefeitura_id : '';
     }
 
     public function getTenant()

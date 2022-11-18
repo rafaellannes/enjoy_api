@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'min:3', 'max:100'],
             'email' => ['required', 'email', 'unique:clients,email'],
             'password' => ['required', 'min:6', 'max:20'],
-            'uuid' => ['required', 'exists:prefeituras,uuid']
+            /* 'uuid' => ['required', 'exists:prefeituras,uuid'] */
         ];
     }
 }
