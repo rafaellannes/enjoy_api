@@ -37,7 +37,7 @@ class CustomPaginator extends LengthAwarePaginator
             'last_page_url' => $this->url($this->lastPage()),
             /*  'links' => $this->linkCollection()->toArray(), */
             'next_page_url' => $this->nextPage(),
-           /*  'path' => $this->path(), */
+            /*  'path' => $this->path(), */
             'per_page' => $this->perPage(),
             'prev_page_url' => $this->previousPage(),
             'to' => $this->lastItem(),
