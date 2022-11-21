@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'min:3', 'max:100'],
             'email' => ['required', 'email', 'unique:clients,email'],
-            'password' => ['required', 'min:6', 'max:20'],
+            'password' => ['required', 'min:6', 'max:80'],
             /* 'uuid' => ['required', 'exists:prefeituras,uuid'] */
         ];
     }

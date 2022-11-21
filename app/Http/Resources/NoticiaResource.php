@@ -14,6 +14,7 @@ class NoticiaResource extends JsonResource
      */
     public function toArray($request)
     {
+        dd($this->img);
         return parent::toArray($request);
     }
 }
