@@ -17,8 +17,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-   /*      $this->app->alias(CustomPaginator::class, LengthAwarePaginator::class);
-        $this->app->alias(CustomPaginator::class, LengthAwarePaginatorContract::class); */
+        $this->app->alias(CustomPaginator::class, LengthAwarePaginator::class);
+        $this->app->alias(CustomPaginator::class, LengthAwarePaginatorContract::class);
     }
 
     /**
