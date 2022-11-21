@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Client;
 
-class CLientRepository
+class ClientRepository
 {
     protected $client;
 
