@@ -8,11 +8,13 @@ class NoticiaService
 {
     protected $noticiaRepository;
     protected $translateService;
+    protected $paginationService;
 
-    public function __construct(NoticiaRepository $noticiaRepository, TranslateService $translateService)
+    public function __construct(NoticiaRepository $noticiaRepository, TranslateService $translateService, PaginationService $paginationService)
     {
         $this->noticiaRepository = $noticiaRepository;
         $this->translateService = $translateService;
+        $this->paginationService = $paginationService;
     }
 
 
@@ -25,7 +27,9 @@ class NoticiaService
             $noticia->descricao = $this->translateService->translate($noticia->descricao, $idioma);
         }
 
-        return $noticias;
+
+         return $noticias;
+        //return $this->paginationService->paginate($noticias);
     }
 
     public function getNoticia($uuid, $idioma)

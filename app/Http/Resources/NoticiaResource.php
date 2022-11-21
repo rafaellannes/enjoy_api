@@ -14,6 +14,8 @@ class NoticiaResource extends JsonResource
      */
     public function toArray($request)
     {
+
+        /* dd($this->resource); */
         $imgArr = [];
         foreach ($this->img as $img) {
             $imgArr[] = [
@@ -22,13 +24,16 @@ class NoticiaResource extends JsonResource
         }
 
         return [
-            'titulo' => $this->titulo,
+            'titulo' => $this['titulo'],
             'img' => $imgArr,
             'descricao' => $this->descricao,
             'data_evento' => $this->data_evento,
             'categoria' => $this->categoria->descricao,
             'data_publicacao' => $this->created_at,
             'identify' => $this->uuid,
+
+
+
         ];
     }
 }

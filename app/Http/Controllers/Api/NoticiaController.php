@@ -24,6 +24,8 @@ class NoticiaController extends Controller
         $idioma = $request->idioma ?? 'pt';
         $noticias = $this->noticiaService->getNoticiasAtivas($idioma);
 
+       /*  dd($noticias); */
+
         return NoticiaResource::collection($noticias);
     }
 
