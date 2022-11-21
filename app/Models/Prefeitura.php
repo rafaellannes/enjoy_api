@@ -17,8 +17,8 @@ class Prefeitura extends Model
         'created_at' => 'date:d/m/Y',
     ];
 
-    public function clients()
+    /*    public function clients()
     {
         return $this->hasMany(Client::class);
-    }
+    } */
 }

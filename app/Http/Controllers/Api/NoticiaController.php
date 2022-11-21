@@ -21,22 +21,26 @@ class NoticiaController extends Controller
 
     public function index(TenantRequest $request)
     {
-        $noticias = $this->noticiaService->getNoticiasAtivas();
+        $idioma = $request->idioma ?? 'pt';
+        $noticias = $this->noticiaService->getNoticiasAtivas($idioma);
 
         return NoticiaResource::collection($noticias);
     }
 
     public function show(TenantRequest $request, $uuid)
     {
-        $noticia = $this->noticiaService->getNoticia($uuid);
+        $idioma = $request->idioma ?? 'pt';
+        $noticia = $this->noticiaService->getNoticia($uuid, $idioma);
 
         return new NoticiaResource($noticia);
     }
 
     public function noticiasByCategoria(TenantRequest $request, $uuidCategoria)
     {
+        $idioma = $request->idioma ?? 'pt';
+
         $categoria = $this->noticiaCategoriaService->noticiaCategoriaByUuid($uuidCategoria);
-        $noticias = $this->noticiaService->getNoticiasByCategoria($categoria->id);
+        $noticias = $this->noticiaService->getNoticiasByCategoria($categoria->id, $idioma);
 
         return NoticiaResource::collection($noticias);
     }

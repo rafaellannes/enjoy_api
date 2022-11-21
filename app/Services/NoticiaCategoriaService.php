@@ -8,14 +8,21 @@ class NoticiaCategoriaService
 {
     protected $noticiaCategoriaRepository;
 
-    public function __construct(NoticiaCategoriaRepository $noticiaCategoriaRepository)
+    public function __construct(NoticiaCategoriaRepository $noticiaCategoriaRepository, TranslateService $translateService)
     {
         $this->noticiaCategoriaRepository = $noticiaCategoriaRepository;
+        $this->translateService = $translateService;
     }
 
-    public function getNoticiaCategorias()
+
+    public function getNoticiaCategorias($idioma)
     {
-        return $this->noticiaCategoriaRepository->getNoticiaCategorias();
+        $categorias =  $this->noticiaCategoriaRepository->getNoticiaCategorias();
+        foreach ($categorias as $categoria) {
+            $categoria->descricao = $this->translateService->translate($categoria->descricao, $idioma);
+        }
+
+        return $categorias;
     }
 
     public function noticiaCategoriaByUuid($uuid)

@@ -19,11 +19,10 @@ class NoticiaCategoriaController extends Controller
 
     public function index(TenantRequest $request)
     {
-        $noticiaCategorias = $this->noticiaCategoriaService->getNoticiaCategorias();
+        $idioma = $request->idioma ?? 'pt';
+
+        $noticiaCategorias = $this->noticiaCategoriaService->getNoticiaCategorias($idioma);
 
         return NoticiaCategoriaResource::collection($noticiaCategorias);
     }
-
-
-
 }

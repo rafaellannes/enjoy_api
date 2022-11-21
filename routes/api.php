@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{
     NoticiaCategoriaController,
     NoticiaController,
+    PrefeituraController,
 };
 
 use App\Http\Controllers\Api\Auth\{
@@ -23,6 +24,10 @@ use App\Http\Controllers\Api\Auth\{
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+//PREFEITURAS
+Route::get('/prefeituras', [PrefeituraController::class, 'index']);
+//
 
 //CATEGORIA-NOTICIA
 Route::get('/categorias-noticias', [NoticiaCategoriaController::class, 'index']);
