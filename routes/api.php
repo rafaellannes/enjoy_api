@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\{
     NoticiaCategoriaController,
     NoticiaController,
     PrefeituraController,
+    ServicoCategoriaController,
+    ServicoController,
 };
 
 use App\Http\Controllers\Api\Auth\{
@@ -33,13 +35,20 @@ Route::get('/prefeituras', [PrefeituraController::class, 'index']);
 Route::get('/categorias-noticias', [NoticiaCategoriaController::class, 'index']);
 //
 
-
 //NOTICIAS
 Route::get('/noticias', [NoticiaController::class, 'index']);
 Route::get('/noticia/{uuid}', [NoticiaController::class, 'show']);
 Route::get('/noticias/categoria/{UuidCategoria}', [NoticiaController::class, 'noticiasByCategoria']);
 //
 
+//CATEGORIAS-SERVICOS
+Route::get('/categorias', [ServicoCategoriaController::class, 'index']);
+//
+
+//SERVICOS
+Route::get('/servicos', [ServicoController::class, 'index']);
+Route::get('/servico/{uuid}', [ServicoController::class, 'show']);
+//
 
 
 //AUTH

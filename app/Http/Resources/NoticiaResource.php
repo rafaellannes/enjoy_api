@@ -16,7 +16,7 @@ class NoticiaResource extends JsonResource
     {
 
         /* dd($this->resource); */
-        $imgArr = [];
+
         foreach ($this->img as $img) {
             $imgArr[] = [
                 'url' => 'storage/img/noticias/' . $img,
@@ -31,8 +31,6 @@ class NoticiaResource extends JsonResource
             'categoria' => $this->categoria->descricao,
             'data_publicacao' => $this->created_at,
             'identify' => $this->uuid,
-
-
 
         ];
     }
