@@ -58,6 +58,8 @@ class ServicoRepository
             ->Orwhere('descricao', 'like', "%{$search}%")
             ->Orwhere('endereco', 'like', "%{$search}%")
             ->with('subcategoria.categoria', 'redes', 'tags.icone')
+            ->where('ativo', true)
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 }

@@ -16,6 +16,7 @@ class RedeSocialResource extends JsonResource
     {
         return [
             'descricao' => $this->descricao,
+            'icone' => $this->icone,
             'link' => $this->pivot->link,
         ];
     }
