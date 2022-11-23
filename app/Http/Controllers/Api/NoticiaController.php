@@ -24,21 +24,41 @@ class NoticiaController extends Controller
         $idioma = $request->idioma ?? 'pt';
         $noticias = $this->noticiaService->getNoticiasAtivas($idioma);
 
-       /*  dd($noticias); */
+        if ($noticias->count() == 0) {
+            return response()->json(['message' => 'Nenhuma notícia encontrada'], 404);
+        }
 
         return NoticiaResource::collection($noticias);
     }
 
     public function show(TenantRequest $request, $uuid)
     {
+        $validator = \Validator::make(['uuid' => $uuid], [
+            'uuid' => 'required|uuid| exists:noticias,uuid'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Notícia não encontrada'], 404);
+        }
+
         $idioma = $request->idioma ?? 'pt';
         $noticia = $this->noticiaService->getNoticia($uuid, $idioma);
+
 
         return new NoticiaResource($noticia);
     }
 
     public function noticiasByCategoria(TenantRequest $request, $uuidCategoria)
     {
+
+        $validator = \Validator::make(['uuid' => $uuidCategoria], [
+            'uuid' => 'required|uuid| exists:noticia_categorias,uuid'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Categoria não encontrada'], 404);
+        }
+
         $idioma = $request->idioma ?? 'pt';
 
         $categoria = $this->noticiaCategoriaService->noticiaCategoriaByUuid($uuidCategoria);

@@ -17,4 +17,9 @@ class ServicoCategoriaRepository
     {
         return $this->servicoCategoria->where('ativo', true)->get();
     }
+
+    public function getCategoriaByUuid($uuid)
+    {
+        return $this->servicoCategoria->where('uuid', $uuid)->first();
+    }
 }

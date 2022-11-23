@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\{
     PrefeituraController,
     ServicoCategoriaController,
     ServicoController,
+    SubcategoriaController,
 };
 
 use App\Http\Controllers\Api\Auth\{
@@ -45,9 +46,14 @@ Route::get('/noticias/categoria/{UuidCategoria}', [NoticiaController::class, 'no
 Route::get('/categorias', [ServicoCategoriaController::class, 'index']);
 //
 
+//SUBCATEGORIAS-SERVICOS
+Route::get('/subcategorias/categoria/{UuidCategoria}', [SubcategoriaController::class, 'subcategoriasByCategoria']);
+//
+
 //SERVICOS
 Route::get('/servicos', [ServicoController::class, 'index']);
 Route::get('/servico/{uuid}', [ServicoController::class, 'show']);
+Route::get('/servicos/subcategoria/{uuid}', [ServicoController::class, 'getServicosBySubcategoria']);
 //
 
 

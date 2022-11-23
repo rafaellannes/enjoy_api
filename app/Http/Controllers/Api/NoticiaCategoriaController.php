@@ -23,6 +23,10 @@ class NoticiaCategoriaController extends Controller
 
         $noticiaCategorias = $this->noticiaCategoriaService->getNoticiaCategorias($idioma);
 
+        if ($noticiaCategorias->count() == 0) {
+            return response()->json(['message' => 'Nenhuma categoria encontrada'], 404);
+        }
+
         return NoticiaCategoriaResource::collection($noticiaCategorias);
     }
 }

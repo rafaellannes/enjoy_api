@@ -23,4 +23,9 @@ class ServicoCategoriaService
 
         return $categorias;
     }
+
+    public function getCategoriaByUuid($uuid)
+    {
+        return $this->servicoCategoriaRepository->getCategoriaByUuid($uuid);
+    }
 }

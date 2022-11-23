@@ -34,6 +34,7 @@ class NoticiaService
     {
         $noticia =  $this->noticiaRepository->getNoticia($uuid);
 
+
         $noticia->titulo = $this->translateService->translate($noticia->titulo, $idioma);
         $noticia->descricao = $this->translateService->translate($noticia->descricao, $idioma);
 
