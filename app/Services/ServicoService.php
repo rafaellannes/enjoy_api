@@ -61,4 +61,16 @@ class ServicoService
         }
         return $servicos;
     }
+
+    public function getServicosBySearch($search, $idioma)
+    {
+        $servicos =  $this->servicoRepository->getServicosBySearch($search);
+
+        foreach ($servicos as $servico) {
+            $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
+            $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
+        }
+
+        return $servicos;
+    }
 }

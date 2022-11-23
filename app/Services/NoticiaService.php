@@ -51,4 +51,15 @@ class NoticiaService
         }
         return $noticias;
     }
+
+    public function getNoticiasBySearch($search, $idioma)
+    {
+        $noticias =  $this->noticiaRepository->getNoticasBySearch($search);
+
+        foreach ($noticias as $noticia) {
+            $noticia->titulo = $this->translateService->translate($noticia->titulo, $idioma);
+            $noticia->descricao = $this->translateService->translate($noticia->descricao, $idioma);
+        }
+        return $noticias;
+    }
 }

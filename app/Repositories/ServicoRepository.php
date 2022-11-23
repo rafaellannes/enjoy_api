@@ -45,4 +45,19 @@ class ServicoRepository
                 $query->where('categoria_id', $idCategoria);
             })->paginate(3);
     }
+
+    public function getServicosBySearch($search)
+    {
+        return $this->servico->whereHas('subcategoria', function ($q) use ($search) {
+            $q->where('descricao', 'like', "%{$search}%");
+        })
+            ->OrwhereHas('tags', function ($q) use ($search) {
+                $q->where('descricao', 'like', "%{$search}%");
+            })
+            ->Orwhere('titulo', 'like', "%{$search}%")
+            ->Orwhere('descricao', 'like', "%{$search}%")
+            ->Orwhere('endereco', 'like', "%{$search}%")
+            ->with('subcategoria.categoria', 'redes', 'tags.icone')
+            ->get();
+    }
 }

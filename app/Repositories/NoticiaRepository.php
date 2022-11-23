@@ -31,4 +31,16 @@ class NoticiaRepository
             ->where('ativo', true)
             ->paginate();
     }
+
+    public function getNoticasBySearch($search)
+    {
+        return $this->noticia->whereHas('categoria', function ($query) use ($search) {
+            $query->where('descricao', 'like', "%{$search}%");
+        })
+            ->orWhere('titulo', 'like', "%{$search}%")
+            ->orWhere('descricao', 'like', "%{$search}%")
+            ->where('ativo', true)
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+    }
 }

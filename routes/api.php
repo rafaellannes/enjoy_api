@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\{
     NoticiaCategoriaController,
     NoticiaController,
+    PesquisaController,
     PrefeituraController,
     ServicoCategoriaController,
     ServicoController,
@@ -55,6 +56,10 @@ Route::get('/servicos', [ServicoController::class, 'index']);
 Route::get('/servico/{uuid}', [ServicoController::class, 'show']);
 Route::get('/servicos/subcategoria/{uuid}', [ServicoController::class, 'getServicosBySubcategoria']);
 Route::get('/servicos/categoria/{uuid}', [ServicoController::class, 'getServicosByCategoria']);
+//
+
+//PESQUISA
+Route::get('/pesquisa/{filter}', [PesquisaController::class, 'search']);
 //
 
 
