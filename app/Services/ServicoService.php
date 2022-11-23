@@ -51,7 +51,7 @@ class ServicoService
         return $servicos;
     }
 
-/*     public function getServicosByCategoria($idCategoria, $idioma)
+    public function getServicosByCategoria($idCategoria, $idioma)
     {
         $servicos =  $this->servicoRepository->getServicosByCategoria($idCategoria);
 
@@ -60,5 +60,5 @@ class ServicoService
             $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
         }
         return $servicos;
-    } */
+    }
 }

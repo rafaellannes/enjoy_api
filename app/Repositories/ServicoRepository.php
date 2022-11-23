@@ -35,4 +35,14 @@ class ServicoRepository
             ->where('ativo', true)
             ->where('subcategoria_id', $idSubcategoria)->paginate(3);
     }
+
+    public function getServicosByCategoria($idCategoria)
+    {
+        return $this->servico
+            ->with('subcategoria.categoria', 'redes', 'tags.icone')
+            ->where('ativo', true)
+            ->whereHas('subcategoria', function ($query) use ($idCategoria) {
+                $query->where('categoria_id', $idCategoria);
+            })->paginate(3);
+    }
 }

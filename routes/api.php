@@ -54,6 +54,7 @@ Route::get('/subcategorias/categoria/{UuidCategoria}', [SubcategoriaController::
 Route::get('/servicos', [ServicoController::class, 'index']);
 Route::get('/servico/{uuid}', [ServicoController::class, 'show']);
 Route::get('/servicos/subcategoria/{uuid}', [ServicoController::class, 'getServicosBySubcategoria']);
+Route::get('/servicos/categoria/{uuid}', [ServicoController::class, 'getServicosByCategoria']);
 //
 
 
