@@ -24,7 +24,7 @@ class NoticiaResource extends JsonResource
         }
 
         return [
-            'titulo' => $this['titulo'],
+            'titulo' => $this->titulo,
             'img' => $imgArr,
             'descricao' => $this->descricao,
             'data_evento' => $this->data_evento,

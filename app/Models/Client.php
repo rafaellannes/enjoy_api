@@ -16,10 +16,20 @@ class Client  extends Authenticatable
         'name',
         'email',
         'password',
+        'notificacao',
+        'descontos',
+        'sexo',
+        'data_nascimento',
+
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    public function historicos()
+    {
+        return $this->hasMany(Historico::class);
+    }
 }

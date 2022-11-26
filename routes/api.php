@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\{
+    ClientController,
+    HistoricoController,
     NoticiaCategoriaController,
     NoticiaController,
     PesquisaController,
@@ -69,5 +71,16 @@ Route::post('/login', [AuthClientController::class, 'auth']); //Login
 //
 
 Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegidas
+
+    //CLIENT LOGADO - TOKEN
     Route::get('/auth/me', [AuthClientController::class, 'me']);
+    Route::put('client/update', [ClientController::class, 'update']); //Atualizar dados do cliente
+    //
+
+    //HISTORICO
+    Route::resource('clients/historicos', HistoricoController::class)->only(['index', 'store', 'destroy']);
+
+
+    //Route::post('/logout', [AuthClientController::class, 'logout']);
+
 });

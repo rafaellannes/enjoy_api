@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
@@ -8,9 +8,8 @@ use App\Http\Resources\ClientResource;
 use App\Services\ClientService;
 use Illuminate\Http\Request;
 
-class RegisterController extends Controller
+class ClientController extends Controller
 {
-
     protected $clientService;
 
     public function __construct(ClientService $clientService)
@@ -18,14 +17,10 @@ class RegisterController extends Controller
         $this->clientService = $clientService;
     }
 
-
-    public function register(RegisterRequest $request)
+    public function update(RegisterRequest $request)
     {
-        if (!$request->password) {
-            return response()->json(['message' => 'Password is required'], 400);
-        }
-
-        $client = $this->clientService->createClient($request->all());
+        $clientLogado = $request->user();
+        $client = $this->clientService->updateClient($request->all(), $clientLogado->id);
 
         return new ClientResource($client);
     }

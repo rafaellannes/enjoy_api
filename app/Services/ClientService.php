@@ -18,4 +18,12 @@ class ClientService
         $data['password'] = bcrypt($data['password']);
         return $this->clientRepository->createClient($data);
     }
+
+    public function updateClient(array $data, int $id)
+    {
+        if (isset($data['password'])) {
+            $data['password'] = bcrypt($data['password']);
+        }
+        return $this->clientRepository->updateClient($data, $id);
+    }
 }

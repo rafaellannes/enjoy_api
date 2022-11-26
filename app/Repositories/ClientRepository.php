@@ -17,4 +17,12 @@ class ClientRepository
     {
         return $this->client->create($data);
     }
+
+    public function updateClient($data, $id)
+    {
+        $client = $this->client->findOrFail($id);
+        $client->update($data);
+
+        return $client;
+    }
 }

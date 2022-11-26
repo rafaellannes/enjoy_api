@@ -8,6 +8,9 @@ use App\Pagination\CustomPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator as LengthAwarePaginatorContract;
 
+use App\Models\Historico;
+use App\Observers\HistoricoObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Historico::observe(HistoricoObserver::class);
     }
 }

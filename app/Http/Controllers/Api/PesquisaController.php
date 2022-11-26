@@ -23,7 +23,7 @@ class PesquisaController extends Controller
     public function search(TenantRequest $request, $search)
     {
         $validator = \Validator::make(['search' => $search], [
-            'search' => 'required|string|min:3'
+            'search' => 'required|string|min:1'
         ]);
 
         if ($validator->fails()) {

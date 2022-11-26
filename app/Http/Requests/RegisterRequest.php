@@ -23,11 +23,14 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return  [
             'name' => ['required', 'min:3', 'max:100'],
-            'email' => ['required', 'email', 'unique:clients,email'],
-            'password' => ['required', 'min:6', 'max:80'],
-            /* 'uuid' => ['required', 'exists:prefeituras,uuid'] */
+            'email' => 'required|email|unique:clients,email,' . $this->user()->id,
+            'password' => ['sometimes', 'min:6', 'max:80'],
+            'notificacao' => ['required', 'boolean'],
+            'descontos' => ['required', 'boolean'],
+            'sexo' => ['required', 'in:M,F,O'],
+            'data_nascimento' => ['required', 'date'],
         ];
     }
 }
