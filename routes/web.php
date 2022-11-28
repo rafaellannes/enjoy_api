@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ServicoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+
 });
+
+Route::get('/servicos/group/categoria', [ServicoController::class, 'getServicosGroupByCategoria']);

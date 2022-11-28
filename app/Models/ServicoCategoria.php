@@ -30,6 +30,6 @@ class ServicoCategoria extends Model
 
     public function subcategorias()
     {
-        return $this->hasMany(ServicoSubcategoria::class, 'categoria_id');
+        return $this->hasMany(Subcategoria::class, 'categoria_id');
     }
 }

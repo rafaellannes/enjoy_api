@@ -58,6 +58,8 @@ Route::get('/servicos', [ServicoController::class, 'index']);
 Route::get('/servico/{uuid}', [ServicoController::class, 'show']);
 Route::get('/servicos/subcategoria/{uuid}', [ServicoController::class, 'getServicosBySubcategoria']);
 Route::get('/servicos/categoria/{uuid}', [ServicoController::class, 'getServicosByCategoria']);
+
+Route::get('/servicos/group/categoria/', [ServicoController::class, 'getServicosGroupByCategoria']);
 //
 
 //PESQUISA

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tenant\TenantRequest;
+use App\Http\Resources\HomeServicosResource;
 use App\Http\Resources\ServicoResource;
 use App\Services\ServicoCategoriaService;
 use App\Services\ServicoService;
@@ -84,5 +85,15 @@ class ServicoController extends Controller
         $servicos = $this->servicoService->getServicosByCategoria($categoria->id, $idioma);
 
         return ServicoResource::collection($servicos);
+    }
+
+    public function getServicosGroupByCategoria(TenantRequest $request)
+    {
+        $idioma = $request->idioma ?? 'pt';
+
+        $servicos = $this->servicoService->getServicosGroupByCategoria($idioma);
+
+
+        return HomeServicosResource::collection($servicos);
     }
 }

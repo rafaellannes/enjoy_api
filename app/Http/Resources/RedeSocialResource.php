@@ -15,9 +15,9 @@ class RedeSocialResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'descricao' => $this->descricao,
-            'icone' => $this->icone,
-            'link' => $this->pivot->link,
+            'descricao' => $this['descricao'],
+            'icone' => $this['icone'],
+            'link' => $this['pivot']['link'],
         ];
     }
 }

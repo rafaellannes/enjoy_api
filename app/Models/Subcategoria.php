@@ -27,4 +27,16 @@ class Subcategoria extends Model
     {
         return $this->belongsTo(ServicoCategoria::class, 'categoria_id');
     }
+
+    public function servicos()
+    {
+        return $this->hasMany(Servico::class);
+    }
+
+    public function servicosLimitados()
+    {
+        return $this->hasMany(Servico::class)
+            ->where('ativo', true)
+            ->limit(10);
+    }
 }

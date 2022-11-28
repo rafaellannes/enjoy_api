@@ -73,4 +73,27 @@ class ServicoService
 
         return $servicos;
     }
+
+    public function getServicosGroupByCategoria($idioma)
+    {
+        $data =  $this->servicoRepository->getServicosGroupByCategoria();
+
+        /*   foreach ($servicos as $servico) {
+            $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
+            $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
+        } */
+
+        //LIMPAR AS SUBCATEGORIAS QUE NÃO TEM SERVIÇOS
+        foreach ($data as $key_categoria => $categoria_value) {
+            foreach ($data[$key_categoria]['subcategorias'] as $key_subcategoria => $value_subcategoria) {
+                if ($value_subcategoria['servicos_limitados'] == null) {
+                    unset($data[$key_categoria]['subcategorias'][$key_subcategoria]);
+
+                    $data[$key_categoria]['subcategorias'] = array_values($data[$key_categoria]['subcategorias']);
+                }
+            }
+        }
+
+        return $data;
+    }
 }
