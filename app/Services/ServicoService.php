@@ -29,7 +29,7 @@ class ServicoService
         return $servicos;
     }
 
-    public function getServico($uuid, $idioma)
+    public function getServico($uuid, $idioma = null)
     {
         $servico =  $this->servicoRepository->getServico($uuid);
 

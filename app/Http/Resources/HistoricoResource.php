@@ -14,10 +14,13 @@ class HistoricoResource extends JsonResource
      */
     public function toArray($request)
     {
+
+     return $this['servicos'];
+
         return
             [
-                'descricao' => $this->descricao,
-                'uuid' => $this->uuid,
+                'servicos' => ServicoResource::collection($this->servicos),
+                'noticias' => NoticiaResource::collection($this->noticias),
             ];
     }
 }

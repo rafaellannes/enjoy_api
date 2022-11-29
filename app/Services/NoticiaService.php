@@ -30,7 +30,7 @@ class NoticiaService
         return $noticias;
     }
 
-    public function getNoticia($uuid, $idioma)
+    public function getNoticia($uuid, $idioma = null)
     {
         $noticia =  $this->noticiaRepository->getNoticia($uuid);
 

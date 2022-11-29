@@ -15,6 +15,8 @@ class Historico extends Model
         'client_id',
         'prefeitura_id',
         'uuid',
+        'model_uuid',
+        'model_type',
     ];
 
     public function client()
