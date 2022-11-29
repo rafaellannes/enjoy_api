@@ -24,6 +24,10 @@ class HistoricoController extends Controller
     {
         $historicos = $request->user()->historicos;
 
+        if ($historicos->count() == 0) {
+            return response()->json(['message' => 'Nenhum histórico encontrado'], 404);
+        }
+
         $historicos = $this->modelService->handleModelByUuid($historicos);
 
         return [

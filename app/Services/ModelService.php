@@ -25,8 +25,8 @@ class ModelService
 
 
         $model = [
-            'noticias' => $noticias,
-            'servicos' => $servicos
+            'noticias' => $noticias ?? [],
+            'servicos' => $servicos ?? [],
         ];
 
         return $model;
