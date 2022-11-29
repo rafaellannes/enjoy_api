@@ -15,7 +15,6 @@ class CreateHistoricosTable extends Migration
     {
         Schema::create('historicos', function (Blueprint $table) {
             $table->id();
-            $table->string('descricao');
             $table->foreignId('client_id')->constrained('clients');
             $table->foreignId('prefeitura_id')->constrained('prefeituras');
             $table->uuid('uuid')->unique();

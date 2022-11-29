@@ -11,7 +11,7 @@ class Historico extends Model
     use HasFactory, TenantTrait;
 
     protected $fillable = [
-        'descricao',
+
         'client_id',
         'prefeitura_id',
         'uuid',

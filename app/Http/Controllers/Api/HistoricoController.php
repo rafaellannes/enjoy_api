@@ -36,7 +36,6 @@ class HistoricoController extends Controller
     public function store(TenantRequest $request)
     {
         $request->validate([
-            'descricao' => ['required', 'string',  'min:3', 'max:255'],
             'model_uuid' => ['required', 'uuid'],
             'model_type' => ['required', 'in:Servico,Noticia'],
 
