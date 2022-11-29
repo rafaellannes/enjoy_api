@@ -27,7 +27,7 @@ class HomeServicosResource extends JsonResource
                     'titulo' => $service['titulo'],
                     'descricao' => $service['descricao'],
                     'identify' => $service['uuid'],
-                    'contato' => $service['contato'],
+                    'telefone' => $service['contato'],
                     'endereco' => $service['endereco'],
                     'img' => $imgArr,
                     'latitude' => $service['latitude'],
@@ -43,7 +43,6 @@ class HomeServicosResource extends JsonResource
             'uuid' => $this['uuid'],
             'icone' => $this['icone']['descricao'],
             'servicos' => $servicos,
-
         ];
     }
 }
