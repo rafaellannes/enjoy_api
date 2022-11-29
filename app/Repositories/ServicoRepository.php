@@ -70,7 +70,7 @@ class ServicoRepository
     {
 
         $result =  $this->categoria
-            ->with('icone', 'subcategorias.servicosLimitados.tags.icone', 'subcategorias.servicosLimitados.redes')
+            ->with('icone', 'subcategorias.servicosLimitados.tags.icone', 'subcategorias.servicosLimitados.redes', 'subcategorias.servicosLimitados.subcategoria.categoria')
             ->whereHas('subcategorias', function ($q) {
                 $q->whereHas('servicos', function ($q) {
                     $q->where('ativo', true);

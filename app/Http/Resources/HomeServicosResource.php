@@ -32,6 +32,11 @@ class HomeServicosResource extends JsonResource
                     'img' => $imgArr,
                     'latitude' => $service['latitude'],
                     'longitude' => $service['longitude'],
+                    'subcategoria' => [
+                        'descricao' => $service['subcategoria']['descricao'],
+                        'categoria' => $service['subcategoria']['categoria']['descricao'],
+                        'identify' => $service['subcategoria']['uuid'],
+                    ],
                     'redes' => RedeSocialResource::collection($service['redes']),
                     'tags' => TagResource::collection($service['tags']),
                 ];
