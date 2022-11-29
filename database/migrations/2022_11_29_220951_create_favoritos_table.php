@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterarHistoricosTableModelColumn extends Migration
+class CreateFavoritosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,15 @@ class AlterarHistoricosTableModelColumn extends Migration
      */
     public function up()
     {
-        Schema::table('historicos', function (Blueprint $table) {
+        Schema::create('favoritos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('client_id')->constrained('clients');
+            $table->foreignId('prefeitura_id')->constrained('prefeituras');
+            $table->uuid('uuid')->unique();
             $table->string('model_uuid');
             $table->string('model_type');
+
+            $table->timestamps();
         });
     }
 
@@ -26,9 +32,6 @@ class AlterarHistoricosTableModelColumn extends Migration
      */
     public function down()
     {
-        Schema::table('historicos', function (Blueprint $table) {
-            $table->dropColumn('model_uuid');
-            $table->dropColumn('model_type');
-        });
+        Schema::dropIfExists('favoritos');
     }
 }

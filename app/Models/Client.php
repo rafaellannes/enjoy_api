@@ -32,4 +32,9 @@ class Client  extends Authenticatable
     {
         return $this->hasMany(Historico::class);
     }
+
+    public function favoritos()
+    {
+        return $this->hasMany(Favorito::class);
+    }
 }

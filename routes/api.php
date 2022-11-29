@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\{
     ClientController,
+    FavoritoController,
     HistoricoController,
     NoticiaCategoriaController,
     NoticiaController,
@@ -81,6 +82,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
 
     //HISTORICO
     Route::resource('clients/historicos', HistoricoController::class)->only(['index', 'store', 'destroy']);
+    Route::resource('clients/favoritos', FavoritoController::class)->only(['index', 'store', 'destroy']);
 
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);
