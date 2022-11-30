@@ -16,7 +16,7 @@ class AlterClientsTableColumns extends Migration
         Schema::table('clients', function (Blueprint $table) {
             $table->boolean('notificacao')->default(false);
             $table->boolean('descontos')->default(false);
-            $table->enum('sexo', ['M', 'F', 'O'])->default('M');
+            $table->enum('sexo', ['M', 'F', 'O'])->nullable();
             $table->date('data_nascimento')->nullable();
         });
     }

@@ -2,16 +2,22 @@
 
 namespace App\Providers;
 
-use App\Models\Favorito;
+
 use Illuminate\Support\ServiceProvider;
 
 use App\Pagination\CustomPaginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator as LengthAwarePaginatorContract;
 
-use App\Models\Historico;
-use App\Observers\FavoritoObserver;
-use App\Observers\HistoricoObserver;
+use App\Models\{
+    Historico,
+    Favorito,
+};
+use App\Observers\{
+    HistoricoObserver,
+    FavoritoObserver
+};
+
 
 class AppServiceProvider extends ServiceProvider
 {
