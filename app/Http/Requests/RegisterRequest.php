@@ -23,9 +23,11 @@ class RegisterRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->user()->id ?? null;
+
         return  [
             'name' => ['required', 'min:3', 'max:100'],
-            'email' => 'required|email|unique:clients,email,' . $this->user()->id,
+            'email' => 'required|email|unique:clients,email,' . $id,
             'password' => ['sometimes', 'min:6', 'max:80'],
             'notificacao' => ['sometimes', 'boolean'],
             'descontos' => ['sometimes', 'boolean'],
