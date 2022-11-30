@@ -38,7 +38,9 @@ class AuthClientController extends Controller
 
         $client = $request->user();
 
-       /*  return auth('sanctum')->check(); */
+
+
+        /*  return auth('sanctum')->check(); */
 
         return new ClientResource($client);
     }

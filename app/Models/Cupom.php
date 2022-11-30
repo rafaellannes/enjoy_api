@@ -28,4 +28,11 @@ class Cupom extends Model
 
         'created_at' => 'date:d/m/Y H:i',
     ];
+
+    public function servico()
+    {
+        return $this->belongsTo(Servico::class);
+    }
+
+
 }

@@ -82,7 +82,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
 
     //HISTORICO
     Route::resource('clients/historicos', HistoricoController::class)->only(['index', 'store', 'destroy']);
+    //
+
+    //FAVORITOS
     Route::resource('clients/favoritos', FavoritoController::class)->only(['index', 'store', 'destroy']);
+    //
 
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);

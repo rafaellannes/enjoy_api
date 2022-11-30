@@ -22,6 +22,7 @@ class ClientResource extends JsonResource
             "photo" => $this->photo,
             "sexo" => $this->sexo,
             'data_nascimento' => $this->data_nascimento,
+            'favoritos' => ClientFavoritosResource::collection($this->favoritos),
         ];
     }
 }
