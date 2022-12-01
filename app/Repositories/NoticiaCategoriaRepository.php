@@ -15,11 +15,17 @@ class NoticiaCategoriaRepository
 
     public function getNoticiaCategorias()
     {
-        return $this->noticiaCategoria->paginate();
+        return $this->noticiaCategoria
+            ->has('noticias')
+            ->where('ativo', true)
+            ->paginate();
     }
 
     public function noticiaCategoriaByUuid($uuid)
     {
-        return $this->noticiaCategoria->where('uuid', $uuid)->first();
+        return $this->noticiaCategoria
+            ->where('uuid', $uuid)
+            ->where('ativo', true)
+            ->first();
     }
 }
