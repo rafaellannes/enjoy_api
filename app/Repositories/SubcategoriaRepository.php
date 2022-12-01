@@ -21,6 +21,7 @@ class SubcategoriaRepository
     public function getSubcategoriasByCategoria($idCategoria)
     {
         return $this->subcategoria
+            ->has('servicos')
             ->where('categoria_id', $idCategoria)
             ->where('ativo', true)
             ->get();
