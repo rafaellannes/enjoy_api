@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\{
     ClientController,
+    CupomController,
     FavoritoController,
     HistoricoController,
     NoticiaCategoriaController,
@@ -87,6 +88,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     //FAVORITOS
     Route::resource('clients/favoritos', FavoritoController::class)->only(['index', 'store', 'destroy']);
     //
+
+    //CUPONS DO SERVICO DISPONIVEIS PARA O CLIENTE
+    Route::get('/servicos/{uuid}/cupons', [CupomController::class, 'cuponsDisponiveisByServico']);
+
 
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);

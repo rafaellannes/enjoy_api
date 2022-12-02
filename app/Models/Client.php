@@ -37,4 +37,9 @@ class Client  extends Authenticatable
     {
         return $this->hasMany(Favorito::class);
     }
+
+    public function cupom_gerados()
+    {
+        return $this->hasMany(CupomGerado::class);
+    }
 }

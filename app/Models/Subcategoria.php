@@ -34,7 +34,7 @@ class Subcategoria extends Model
     }
 
     public function servicosLimitados()
-    {
+    { // limita a 3 serviços por subcategoria na home
         return $this->hasMany(Servico::class)
             ->where('ativo', true)
             ->limit(10);

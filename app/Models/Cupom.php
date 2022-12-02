@@ -34,5 +34,8 @@ class Cupom extends Model
         return $this->belongsTo(Servico::class);
     }
 
-
+    public function gerados()
+    {
+        return $this->hasMany(CupomGerado::class);
+    }
 }
