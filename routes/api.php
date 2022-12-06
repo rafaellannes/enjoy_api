@@ -89,9 +89,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     Route::resource('clients/favoritos', FavoritoController::class)->only(['index', 'store', 'destroy']);
     //
 
+    //CUPONS
+
     //CUPONS DO SERVICO DISPONIVEIS PARA O CLIENTE
     Route::get('/servicos/{uuid}/cupons', [CupomController::class, 'cuponsDisponiveisByServico']);
 
+    //RESGATAR CUPOM
+    Route::post('/clients/cupons/{uuid}/resgatar', [CupomController::class, 'resgatarCupom']);
+
+    //CUPONS DO CLIENTE
+    Route::get('/clients/cupons', [CupomController::class, 'cuponsByClient']);
 
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);

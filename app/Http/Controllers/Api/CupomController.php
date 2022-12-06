@@ -23,7 +23,6 @@ class CupomController extends Controller
 
     public function cuponsDisponiveisByServico(TenantRequest $request, $uuidServico)
     {
-        $user = $request->user();
 
         $validator = \Validator::make(['uuid' => $uuidServico], [
             'uuid' => 'required|uuid| exists:servicos,uuid'
@@ -37,12 +36,48 @@ class CupomController extends Controller
 
         $cupons = $this->cupomService->getCuponsByServico($servico->id);
 
-        //validar se o usuário já resgatou o cupom
-        $cupons = $cupons->filter(function ($cupom) use ($user) {
-            return !$cupom->gerados->contains('client_id', $user->id);
-        });
+        return response()->json($cupons);
+    }
 
-        $cupons = array_values($cupons->toArray());
+    public function resgatarCupom(TenantRequest $request, $uuidCupom)
+    {
+
+        $validator = \Validator::make(['uuid' => $uuidCupom], [
+            'uuid' => 'required|uuid| exists:cupons,uuid'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'Cupom não encontrado'], 404);
+        }
+
+        $cupom = $this->cupomService->getCupom($uuidCupom);
+
+        $user = auth()->user();
+
+
+        //validar se o usuário já resgatou o cupom
+        if ($cupom->gerados->contains('client_id', $user->id)) {
+            return response()->json(['message' => 'Você já resgatou esse cupom'], 400);
+        }
+
+        $cupomGerado = $cupom->gerados()->create([
+            'client_id' => $user->id,
+            'cupom_id' => $cupom->id,
+            'data_resgate' => now(),
+        ]);
+
+        return response()->json(
+            ['message' => 'Cupom resgatado com sucesso',],
+            201
+
+        );
+    }
+
+    public function cuponsByClient(TenantRequest $request)
+    {
+        $user = auth()->user();
+
+        $cupons = $user->cuponsGerados()->with('cupom')->get();
 
         return response()->json($cupons);
     }

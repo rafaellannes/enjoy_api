@@ -17,7 +17,10 @@ class CupomRepository
 
     public function getCupom($uuid)
     {
-        return $this->cupom->where('uuid', $uuid)->first();
+        return $this->cupom
+            ->where('uuid', $uuid)
+            ->where('ativo', true)
+            ->first();
     }
 
     public function getCuponsByServico($idServico)
