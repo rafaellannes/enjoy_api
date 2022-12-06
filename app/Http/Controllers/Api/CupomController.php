@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tenant\TenantRequest;
+use App\Http\Resources\CupomResource;
+use App\Http\Resources\ResgateCupomResource;
 use Illuminate\Http\Request;
 
 use App\Services\{
@@ -36,7 +38,7 @@ class CupomController extends Controller
 
         $cupons = $this->cupomService->getCuponsByServico($servico->id);
 
-        return response()->json($cupons);
+        return CupomResource::collection($cupons);
     }
 
     public function resgatarCupom(TenantRequest $request, $uuidCupom)
@@ -79,6 +81,6 @@ class CupomController extends Controller
 
         $cupons = $user->cuponsGerados()->with('cupom')->get();
 
-        return response()->json($cupons);
+        return ResgateCupomResource::collection($cupons);
     }
 }
