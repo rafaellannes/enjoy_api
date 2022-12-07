@@ -14,7 +14,7 @@ class AlterTableCuponsAddColumnQrCode extends Migration
     public function up()
     {
         Schema::table('cupom_gerados', function (Blueprint $table) {
-            $table->string('qr_code')->nullable()->unique();
+            $table->string('qr_code', 191)->nullable()->unique();
         });
     }
 
