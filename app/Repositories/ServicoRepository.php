@@ -70,14 +70,14 @@ class ServicoRepository
     {
 
         $result =  $this->categoria
-            ->with('icone', 'subcategorias.servicosLimitados.tags.icone', 'subcategorias.servicosLimitados.redes', 'subcategorias.servicosLimitados.subcategoria.categoria')
+            ->with('icone', 'subcategorias.servicosLimitados.tags.icone', 'subcategorias.servicosLimitados.redes', 'subcategorias.servicosLimitados.subcategoria.categoria') // Pega as categorias com as subcategorias e os serviços limitados a 3
             ->whereHas('subcategorias', function ($q) {
                 $q->whereHas('servicos', function ($q) {
                     $q->where('ativo', true);
                 });
             })
             ->get()
-            ->take(2)
+            ->take(2) // Pega apenas as duas primeiras categorias
             ->toArray();
 
 
