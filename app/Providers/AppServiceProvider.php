@@ -12,10 +12,12 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator as LengthAwarePaginator
 use App\Models\{
     Historico,
     Favorito,
+    Roteiro,
 };
 use App\Observers\{
     HistoricoObserver,
-    FavoritoObserver
+    FavoritoObserver,
+    RoteiroObserver
 };
 
 
@@ -41,5 +43,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Historico::observe(HistoricoObserver::class);
         Favorito::observe(FavoritoObserver::class);
+        Roteiro::observe(RoteiroObserver::class);
     }
 }

@@ -42,4 +42,9 @@ class Client  extends Authenticatable
     {
         return $this->hasMany(CupomGerado::class);
     }
+
+    public function roteiros()
+    {
+        return $this->hasMany(Roteiro::class);
+    }
 }

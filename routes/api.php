@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\{
     NoticiaController,
     PesquisaController,
     PrefeituraController,
+    RoteiroController,
     ServicoCategoriaController,
     ServicoController,
     SubcategoriaController,
@@ -99,6 +100,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
 
     //CUPONS DO CLIENTE
     Route::get('/clients/cupons', [CupomController::class, 'cuponsByClient']);
+    //
+
+    //ROTEIROS
+    Route::resource('clients/roteiros', RoteiroController::class);
 
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);
