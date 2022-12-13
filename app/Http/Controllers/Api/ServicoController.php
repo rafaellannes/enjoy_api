@@ -96,4 +96,13 @@ class ServicoController extends Controller
 
         return HomeServicosResource::collection($servicos);
     }
+
+    public function getServicosGroupBySubcategoria(TenantRequest $request)
+    {
+        $idioma = $request->idioma ?? 'pt';
+
+        $servicos = $this->servicoService->getServicosGroupBySubcategoria($idioma);
+
+        return $servicos;
+    }
 }

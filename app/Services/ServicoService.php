@@ -97,5 +97,10 @@ class ServicoService
         return $data;
     }
 
+    public function getServicosGroupBySubcategoria()
+    {
+        $servicos =  $this->servicoRepository->getServicosGroupBySubcategoria();
 
+        return $servicos;
+    }
 }

@@ -14,6 +14,14 @@ class CupomResource extends JsonResource
      */
     public function toArray($request)
     {
+        if (isset($this->servico)) {
+            $servico = new ServicoResource($this->servico);
+        } else {
+            $servico = '';
+        }
+
+
+
         return [
             'descricao' => $this['descricao'],
             'detalhes' => $this['detalhes'],
@@ -22,6 +30,7 @@ class CupomResource extends JsonResource
             'valor' => $this['valor'],
             'tipo' => $this['tipo'],
             'identify' => $this['uuid'],
+            'servico' => $servico,
         ];
     }
 }

@@ -79,7 +79,7 @@ class CupomController extends Controller
     {
         $user = auth()->user();
 
-        $cupons = $user->cuponsGerados()->with('cupom')->get();
+        $cupons = $user->cuponsGerados()->with('cupom.servico')->get();
 
         return ResgateCupomResource::collection($cupons);
     }

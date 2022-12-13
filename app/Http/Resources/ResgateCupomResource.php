@@ -14,11 +14,13 @@ class ResgateCupomResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'data_resgate' => $this['data_resgate'],
             'usado' => $this['usado'] ? true : false,
             'data_usado' => $this['data_usado'] ? $this['data_usado'] : '',
             'cupom' => new CupomResource($this->cupom),
+
         ];
     }
 }

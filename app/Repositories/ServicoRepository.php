@@ -4,16 +4,18 @@ namespace App\Repositories;
 
 use App\Models\Servico;
 use App\Models\ServicoCategoria;
+use App\Models\Subcategoria;
 use Illuminate\Support\Facades\DB;
 
 class ServicoRepository
 {
     protected $servico, $categoria;
 
-    public function __construct(Servico $servico, ServicoCategoria $categoria)
+    public function __construct(Servico $servico, ServicoCategoria $categoria, Subcategoria $subcategoria)
     {
         $this->servico = $servico;
         $this->categoria = $categoria;
+        $this->subcategoria = $subcategoria;
     }
 
     public function getServicosAtivos()
@@ -83,14 +85,17 @@ class ServicoRepository
 
 
         return $result;
+    }
 
-        /*     return  DB::table('servicos')
-            ->join('subcategorias', 'servicos.subcategoria_id', '=', 'subcategorias.id')
-            ->join('servico_categorias as cat', 'subcategorias.categoria_id', '=', 'cat.id')
-            ->join('prefeituras', 'servicos.prefeitura_id', '=', 'prefeituras.id')
-            ->select('servicos.*', 'cat.descricao as categoria', 'cat.uuid as uuid_categoria')
-            ->where('servicos.ativo', true)
-            ->where('prefeituras.uuid', request('uuid'))
-            ->get(); */
+    public function getServicosGroupBySubcategoria()
+    {
+        $result = $this->subcategoria
+            ->whereHas('servicos', function ($q) {
+                $q->where('ativo', true);
+            })
+            ->with('servicos')
+            ->get();
+
+        return $result;
     }
 }
