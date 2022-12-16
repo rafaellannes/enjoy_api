@@ -85,4 +85,41 @@ class RoteiroController extends Controller
 
         return response()->json(['message' => 'Roteiro excluído com sucesso!'], 200);
     }
+
+
+    public function attachRoteiroServico(TenantRequest $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'roteiro_uuid' => 'required | exists:roteiros,uuid',
+            'servico_uuid' => 'required | exists:servicos,uuid',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        if (!$this->roteiroService->attachRoteiroServico($request->all())) {
+            return response()->json(['message' => 'Serviço já está no roteiro!'], 422);
+        }
+
+        return response()->json(['message' => 'Serviço adicionado ao roteiro com sucesso!'], 201);
+    }
+
+    public function dettachRoteiroServico(TenantRequest $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'roteiro_uuid' => 'required | exists:roteiros,uuid',
+            'servico_uuid' => 'required | exists:servicos,uuid',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        if (!$this->roteiroService->dettachRoteiroServico($request->all())) {
+            return response()->json(['message' => 'Serviço não está no roteiro!'], 422);
+        }
+
+        return response()->json(['message' => 'Serviço removido do roteiro com sucesso!'], 200);
+    }
 }

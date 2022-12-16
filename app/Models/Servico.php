@@ -36,7 +36,7 @@ class Servico extends Model
         return $this->belongsTo(Prefeitura::class);
     }
 
-/*     public function user()
+    /*     public function user()
     {
         return $this->belongsTo(User::class);
     } */
@@ -54,6 +54,11 @@ class Servico extends Model
     public function cupons()
     {
         return $this->hasMany(Cupom::class);
+    }
+
+    public function roteiros()
+    {
+        return $this->belongsToMany(Roteiro::class, 'roteiros_servicos', 'servico_id', 'roteiro_id')->withPivot('ordem');
     }
 
     protected $casts = [

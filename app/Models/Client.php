@@ -47,4 +47,5 @@ class Client  extends Authenticatable
     {
         return $this->hasMany(Roteiro::class);
     }
+
 }

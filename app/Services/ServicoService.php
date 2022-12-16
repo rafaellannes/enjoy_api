@@ -33,6 +33,7 @@ class ServicoService
     {
         $servico =  $this->servicoRepository->getServico($uuid);
 
+
         $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
         $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
 
