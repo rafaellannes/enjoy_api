@@ -94,7 +94,10 @@ class ServicoRepository
                 $q->where('ativo', true);
             })
             ->with('servicos')
-            ->get();
+            ->get()
+            ->toArray();
+
+
 
         return $result;
     }

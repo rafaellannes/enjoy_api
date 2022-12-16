@@ -107,6 +107,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     Route::resource('clients/roteiros', RoteiroController::class);
     Route::post('clients/roteiros/servicos/attach', [RoteiroController::class, 'attachRoteiroServico']);
     Route::post('clients/roteiros/servicos/dettach', [RoteiroController::class, 'dettachRoteiroServico']);
+
+    Route::get('clients/roteiros/{uuidRoteiro}/servicos', [RoteiroController::class, 'servicosAvailable']);
     //
 
 

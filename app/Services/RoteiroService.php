@@ -64,4 +64,28 @@ class RoteiroService
         $servico->roteiros()->detach($roteiro->id);
         return true;
     }
+
+    public function servicosAvailableByRoteiro($uuidRoteiro)
+    {
+        $roteiro = $this->roteiroRepository->roteiroByUuid($uuidRoteiro);
+
+        /*   return $roteiro->servicos; */
+
+        $servicosRecomendadosBySubcategoria = $this->servicoService->getServicosGroupBySubcategoria();
+
+        /*  return $servicosRecomendadosBySubcategoria; */
+
+        //Excluir os servicos que já estão no roteiro
+        foreach ($servicosRecomendadosBySubcategoria as $keySubCategoria => $subcategoria) {
+            foreach ($subcategoria['servicos'] as $key => $servico) {
+
+                if ($roteiro->servicos->contains($servico['id'])) {
+                    unset($servicosRecomendadosBySubcategoria[$keySubCategoria]['servicos'][$key]);
+                    $servicosRecomendadosBySubcategoria[$keySubCategoria]['servicos'] = array_values($servicosRecomendadosBySubcategoria[$keySubCategoria]['servicos']);
+                }
+            }
+        }
+
+        return $servicosRecomendadosBySubcategoria;
+    }
 }

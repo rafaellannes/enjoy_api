@@ -122,4 +122,18 @@ class RoteiroController extends Controller
 
         return response()->json(['message' => 'Serviço removido do roteiro com sucesso!'], 200);
     }
+
+    public function servicosAvailable(TenantRequest $request, $uuidRoteiro)
+    {
+
+        $validator = \Validator::make(['uuidRoteiro' => $uuidRoteiro], [
+            'uuidRoteiro' => 'required|uuid| exists:roteiros,uuid'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        return $this->roteiroService->servicosAvailableByRoteiro($uuidRoteiro);
+    }
 }
