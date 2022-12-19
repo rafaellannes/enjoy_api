@@ -16,7 +16,7 @@ class CreateRoteirosTable extends Migration
         Schema::create('roteiros', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->string('descricao');
+            $table->string('descricao')->nullable();
             $table->boolean('privado')->default(false);
             $table->uuid('uuid')->unique();
             $table->foreignId('prefeitura_id')->constrained('prefeituras');
