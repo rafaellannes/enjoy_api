@@ -22,7 +22,7 @@ class RoteiroRepository
 
     public function store(array $data)
     {
-        $roteiro = $this->roteiro->create($data);
+        return  $this->roteiro->create($data);
 
         //$roteiro->servicos()->attach($data['servicos']);
 

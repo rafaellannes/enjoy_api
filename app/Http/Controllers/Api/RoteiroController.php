@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tenant\TenantRequest;
+use App\Http\Resources\RoteiroResource;
 use App\Services\RoteiroService;
 use App\Tenant\Rules\UniqueTenant;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class RoteiroController extends Controller
     }
     public function index(TenantRequest $request)
     {
-        return $this->roteiroService->roteirosByClient();
+        return RoteiroResource::collection($this->roteiroService->roteirosByClient());
     }
 
     public function store(TenantRequest $request)
@@ -33,9 +34,11 @@ class RoteiroController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $this->roteiroService->store($request->except('uuid'));
+        $roteiro =   $this->roteiroService->store($request->except('uuid'));
 
-        return response()->json(['message' => 'Roteiro criado com sucesso!'], 201);
+        /*  return response()->json(['message' => 'Roteiro criado com sucesso!'], 201); */
+
+        return new RoteiroResource($roteiro);
     }
 
     public function show(TenantRequest $request, $uuid)
@@ -46,7 +49,7 @@ class RoteiroController extends Controller
             return response()->json(['message' => 'Roteiro não encontrado!'], 404);
         }
 
-        return $roteiro;
+        return new RoteiroResource($roteiro);
     }
 
     public function update(TenantRequest $request, $uuid)
