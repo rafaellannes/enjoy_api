@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoteiroResource extends JsonResource
+class ServicosPorSubcategoriaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,13 +14,12 @@ class RoteiroResource extends JsonResource
      */
     public function toArray($request)
     {
+        $servicos = json_decode(json_encode($this['servicos']), FALSE); // convert to object
+
         return [
-            'titulo' => $this->titulo,
-            'descricao' => $this->descricao,
-            'privado' => $this->privado ? true : false,
-            'uuid' => $this->uuid,
-            'created_at' => $this->created_at,
-            'servicos' => ServicoResource::collection($this->servicos),
+            'descricao' => $this['descricao'],
+            'uuid' => $this['uuid'],
+            'servicos' => ServicoResource::collection($servicos),
         ];
     }
 }

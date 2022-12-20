@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tenant\TenantRequest;
 use App\Http\Resources\RoteiroResource;
+use App\Http\Resources\ServicosPorSubcategoriaResource;
 use App\Services\RoteiroService;
 use App\Tenant\Rules\UniqueTenant;
 use Illuminate\Http\Request;
@@ -137,6 +138,9 @@ class RoteiroController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        return $this->roteiroService->servicosAvailableByRoteiro($uuidRoteiro);
+        $servicosPorSubcategoria =  $this->roteiroService->servicosAvailableByRoteiro($uuidRoteiro);
+
+         /* return $servicosPorSubcategoria; */
+        return ServicosPorSubcategoriaResource::collection($servicosPorSubcategoria);
     }
 }

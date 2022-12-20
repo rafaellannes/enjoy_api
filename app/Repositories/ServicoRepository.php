@@ -93,7 +93,7 @@ class ServicoRepository
             ->whereHas('servicos', function ($q) {
                 $q->where('ativo', true);
             })
-            ->with('servicos')
+            ->with('servicos.tags.icone', 'servicos.redes', 'servicos.subcategoria.categoria')
             ->get()
             ->toArray();
 
