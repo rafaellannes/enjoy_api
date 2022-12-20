@@ -14,12 +14,12 @@ class ServicosPorSubcategoriaResource extends JsonResource
      */
     public function toArray($request)
     {
-        $servicos = json_decode(json_encode($this['servicos']), FALSE); // convert to object
+        //$servicos = json_decode(json_encode($this['servicos']), FALSE); // convert to object
 
         return [
             'descricao' => $this['descricao'],
             'uuid' => $this['uuid'],
-            'servicos' => ServicoResource::collection($servicos),
+            'servicos' => ServicoResource::collection($this['servicos']),
         ];
     }
 }
