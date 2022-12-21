@@ -22,7 +22,8 @@ class RoteiroResource extends JsonResource
             'privado' => $this['privado'] ? true : false,
             'uuid' => $this['uuid'],
             'created_at' => $this['created_at'],
-            'servicos' => ServicoResource::collection($this['servicos']),
+            /* 'servicos' => ServicoResource::collection($this['servicos']), */
+            'servicos' => $this->when($this->relationLoaded('servicos'), ServicoResource::collection($this['servicos'])),
         ];
     }
 }

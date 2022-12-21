@@ -101,6 +101,11 @@ class RoteiroService
             }
         }
 
-        return array_values($roteiros->toArray());
+        /* $roteiros =  array_values($roteiros->toArray()); */
+
+        //convert array to object
+        /* $roteiros = json_decode(json_encode($roteiros)); */
+
+        return $roteiros;
     }
 }
