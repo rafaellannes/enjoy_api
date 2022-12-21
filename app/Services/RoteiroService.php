@@ -88,4 +88,19 @@ class RoteiroService
 
         return $servicosRecomendadosBySubcategoria;
     }
+
+    public function roteirosAvailableByServico($uuidServico)
+    {
+        $servico = $this->servicoService->getServico($uuidServico);
+
+        $roteiros = $this->roteiroRepository->roteirosByClient();
+
+        foreach ($roteiros as $key => $roteiro) {
+            if ($servico->roteiros->contains($roteiro->id)) {
+                $roteiros->forget($key);
+            }
+        }
+
+        return array_values($roteiros->toArray());
+    }
 }

@@ -20,6 +20,7 @@ class RoteiroController extends Controller
     }
     public function index(TenantRequest $request)
     {
+        /* return $this->roteiroService->roteirosByClient(); */
         return RoteiroResource::collection($this->roteiroService->roteirosByClient());
     }
 
@@ -140,7 +141,20 @@ class RoteiroController extends Controller
 
         $servicosPorSubcategoria =  $this->roteiroService->servicosAvailableByRoteiro($uuidRoteiro);
 
-         /* return $servicosPorSubcategoria; */
+        /* return $servicosPorSubcategoria; */
         return ServicosPorSubcategoriaResource::collection($servicosPorSubcategoria);
+    }
+
+    public function roteirosAvailable(TenantRequest $request, $uuidServico)
+    {
+        $validator = \Validator::make(['uuidServico' => $uuidServico], [
+            'uuidServico' => 'required|uuid| exists:servicos,uuid'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        return RoteiroResource::collection($this->roteiroService->roteirosAvailableByServico($uuidServico));
     }
 }

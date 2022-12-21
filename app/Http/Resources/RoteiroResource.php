@@ -14,13 +14,15 @@ class RoteiroResource extends JsonResource
      */
     public function toArray($request)
     {
+
+
         return [
-            'titulo' => $this->titulo,
-            'descricao' => $this->descricao,
-            'privado' => $this->privado ? true : false,
-            'uuid' => $this->uuid,
-            'created_at' => $this->created_at,
-            'servicos' => ServicoResource::collection($this->servicos),
+            'titulo' => $this['titulo'],
+            'descricao' => $this['descricao'],
+            'privado' => $this['privado'] ? true : false,
+            'uuid' => $this['uuid'],
+            'created_at' => $this['created_at'],
+            'servicos' => ServicoResource::collection($this['servicos']),
         ];
     }
 }
