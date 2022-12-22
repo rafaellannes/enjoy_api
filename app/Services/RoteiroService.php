@@ -108,4 +108,9 @@ class RoteiroService
 
         return $roteiros;
     }
+
+    public function roteirosPublicos()
+    {
+        return $this->roteiroRepository->getRoteirosPublicos();
+    }
 }

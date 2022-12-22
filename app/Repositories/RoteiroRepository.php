@@ -36,4 +36,12 @@ class RoteiroRepository
             ->where('uuid', $uuid)
             ->first();
     }
+
+    public function getRoteirosPublicos()
+    {
+        return $this->roteiro
+            ->where('privado', false)
+            ->where('client_id', '!=', auth()->user()->id)
+            ->get();
+    }
 }

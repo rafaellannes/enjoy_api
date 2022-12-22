@@ -155,8 +155,13 @@ class RoteiroController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-       /*  dd($this->roteiroService->roteirosAvailableByServico($uuidServico)); */
+        /*  dd($this->roteiroService->roteirosAvailableByServico($uuidServico)); */
 
         return RoteiroResource::collection($this->roteiroService->roteirosAvailableByServico($uuidServico));
+    }
+
+    public function roteirosPublicos(TenantRequest $request)
+    {
+        return RoteiroResource::collection($this->roteiroService->roteirosPublicos());
     }
 }

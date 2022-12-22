@@ -112,6 +112,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     Route::get('clients/roteiros/{uuidServico}/roteiros', [RoteiroController::class, 'roteirosAvailable']); //Roteiros disponiveis para o servico
     //
 
+    //ROTEIROS PUBLICOS
+    Route::get('/roteiros/publicos', [RoteiroController::class, 'roteirosPublicos']); //Roteiros publicos (excluindo os do cliente logado)
+
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);
 
