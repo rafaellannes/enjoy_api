@@ -28,7 +28,7 @@ class RoteiroController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'titulo' => ['required', 'max:255', 'min:3', 'string', new UniqueTenant('roteiros')],
-            'descricao' => 'required | max:255 | min:3 | string',
+            'descricao' => 'sometimes | max:255 | min:3 | string',
             'privado' => 'required | boolean',
         ]);
 
