@@ -19,6 +19,7 @@ class ResgateCupomResource extends JsonResource
             'data_resgate' => $this['data_resgate'],
             'usado' => $this['usado'] ? true : false,
             'data_usado' => $this['data_usado'] ? $this['data_usado'] : '',
+            'qr_code' => $this['qr_code'] ?? '',
             'cupom' => new CupomResource($this->cupom),
 
         ];
