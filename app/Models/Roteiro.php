@@ -17,6 +17,7 @@ class Roteiro extends Model
         'uuid',
         'prefeitura_id',
         'client_id',
+        'capa'
     ];
 
     public function servicos()

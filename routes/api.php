@@ -23,16 +23,6 @@ use App\Http\Controllers\Api\Auth\{
     AuthClientController
 };
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 //PREFEITURAS
 Route::get('/prefeituras', [PrefeituraController::class, 'index']);
@@ -77,7 +67,6 @@ Route::post('/login', [AuthClientController::class, 'auth']); //Login
 //
 
 Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegidas
-
     //CLIENT LOGADO - TOKEN
     Route::get('/auth/me', [AuthClientController::class, 'me']);
     Route::put('client/update', [ClientController::class, 'update']); //Atualizar dados do cliente
@@ -114,6 +103,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
 
     //ROTEIROS PUBLICOS
     Route::get('/roteiros/publicos', [RoteiroController::class, 'roteirosPublicos']); //Roteiros publicos (excluindo os do cliente logado)
+
+    //CRIAR CAPA PARA ROTEIRO
+    Route::get('/roteiros/{uuid}/capa', [RoteiroController::class, 'createCapa']);
 
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);

@@ -6,12 +6,13 @@ use App\Repositories\RoteiroRepository;
 
 class RoteiroService
 {
-    protected $roteiroRepository, $servicoService;
+    protected $roteiroRepository, $servicoService, $imageService;
 
-    public function __construct(RoteiroRepository $roteiroRepository, ServicoService $servicoService)
+    public function __construct(RoteiroRepository $roteiroRepository, ServicoService $servicoService, ImageService $imageService)
     {
         $this->roteiroRepository = $roteiroRepository;
         $this->servicoService = $servicoService;
+        $this->imageService = $imageService;
     }
 
     public function roteirosByClient()
@@ -112,5 +113,18 @@ class RoteiroService
     public function roteirosPublicos()
     {
         return $this->roteiroRepository->getRoteirosPublicos();
+    }
+
+    public function createCapa(Object $servicosRoteiro)
+    {
+        $imgs = [];
+
+        foreach ($servicosRoteiro as $servico) {
+            foreach ($servico->img as $img) {
+                $imgs[] =  getenv('DASHBOARD_URL') . "storage/img/servicos/{$img}";
+            }
+        }
+
+        return $this->imageService->createCapa($imgs);
     }
 }

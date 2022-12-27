@@ -16,7 +16,7 @@ class RoteiroRepository
     public function roteirosByClient()
     {
         return $this->roteiro->where('client_id', auth()->user()->id)
-            /* ->with('servicos') */
+            ->with('servicos')
             ->get();
     }
 
@@ -40,6 +40,7 @@ class RoteiroRepository
     public function getRoteirosPublicos()
     {
         return $this->roteiro
+            ->with('servicos')
             ->where('privado', false)
             ->where('client_id', '!=', auth()->user()->id)
             ->get();

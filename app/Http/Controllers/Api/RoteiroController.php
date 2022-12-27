@@ -164,4 +164,15 @@ class RoteiroController extends Controller
     {
         return RoteiroResource::collection($this->roteiroService->roteirosPublicos());
     }
+
+    public function createCapa(TenantRequest $request, $uuid)
+    {
+        $roteiro = $this->roteiroService->roteiroByUuid($uuid);
+
+        if (!$roteiro) {
+            return response()->json(['message' => 'Roteiro não encontrado!'], 404);
+        }
+
+        return $this->roteiroService->createCapa($roteiro->servicos);
+    }
 }
