@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\{
     PesquisaController,
     PrefeituraController,
     RoteiroController,
+    RoteiroLikeController,
     ServicoCategoriaController,
     ServicoController,
     SubcategoriaController,
@@ -103,9 +104,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
 
     //ROTEIROS PUBLICOS
     Route::get('/roteiros/publicos', [RoteiroController::class, 'roteirosPublicos']); //Roteiros publicos (excluindo os do cliente logado)
+    //
 
-    //CRIAR CAPA PARA ROTEIRO
-    Route::get('/roteiros/{uuid}/capa', [RoteiroController::class, 'createCapa']);
+    //ROTEIROS LIKE
+    Route::resource('/clients/roteiros/likes', RoteiroLikeController::class)->only(['index', 'store', 'destroy']);
+    //
+
 
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);

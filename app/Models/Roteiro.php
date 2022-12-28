@@ -34,4 +34,9 @@ class Roteiro extends Model
     {
         return $this->belongsTo(Prefeitura::class);
     }
+
+    public function likesRoteiros()
+    {
+        return $this->hasMany(LikesRoteiros::class);
+    }
 }

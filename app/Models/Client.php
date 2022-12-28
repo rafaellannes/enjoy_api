@@ -48,4 +48,8 @@ class Client  extends Authenticatable
         return $this->hasMany(Roteiro::class);
     }
 
+    public function roteirosLikes()
+    {
+        return $this->hasMany(LikesRoteiros::class);
+    }
 }
