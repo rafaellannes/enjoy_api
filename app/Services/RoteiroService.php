@@ -113,4 +113,5 @@ class RoteiroService
     {
         return $this->roteiroRepository->getRoteirosPublicos();
     }
-}
+
+ }

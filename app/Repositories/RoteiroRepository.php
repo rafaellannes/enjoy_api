@@ -16,9 +16,11 @@ class RoteiroRepository
     public function roteirosByClient()
     {
         return $this->roteiro->where('client_id', auth()->user()->id)
-            ->with('servicos', 'likesRoteiros.roteiro.servicos')
+            ->with('servicos')
             ->get();
     }
+
+
 
     public function store(array $data)
     {
@@ -43,6 +45,17 @@ class RoteiroRepository
             ->with('servicos')
             ->where('privado', false)
             ->where('client_id', '!=', auth()->user()->id)
+            ->get();
+    }
+
+
+    public function roteirosLikeByClient()
+    {
+        return $this->roteiro
+            ->whereHas('likesRoteiros', function ($query) {
+                $query->where('client_id', auth()->user()->id);
+            })
+            ->with('servicos')
             ->get();
     }
 }

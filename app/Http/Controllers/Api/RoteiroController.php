@@ -20,7 +20,7 @@ class RoteiroController extends Controller
     }
     public function index(TenantRequest $request)
     {
-        return $this->roteiroService->roteirosByClient();
+        /* return $this->roteiroService->roteirosByClient(); */
         return RoteiroResource::collection($this->roteiroService->roteirosByClient());
     }
 
@@ -164,6 +164,4 @@ class RoteiroController extends Controller
     {
         return RoteiroResource::collection($this->roteiroService->roteirosPublicos());
     }
-
-
 }
