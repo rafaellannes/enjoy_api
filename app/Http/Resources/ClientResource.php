@@ -19,7 +19,7 @@ class ClientResource extends JsonResource
             'email' => $this->email,
             'notificacao' => $this->notificacao,
             'descontos' => $this->descontos,
-            "photo" => $this->photo,
+            "photo" =>  url("storage/{$this->photo}"),
             "sexo" => $this->sexo,
             'data_nascimento' => $this->data_nascimento,
             'favoritos' => ClientFavoritosResource::collection($this->favoritos),

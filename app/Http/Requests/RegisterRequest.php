@@ -33,6 +33,7 @@ class RegisterRequest extends FormRequest
             'descontos' => ['sometimes', 'boolean'],
             'sexo' => ['sometimes', 'in:M,F,O'],
             'data_nascimento' => ['sometimes', 'date'],
+            'photo' => ['sometimes', 'image', 'max:1024', 'mimes:png,jpg,jpeg'],
         ];
     }
 }

@@ -19,8 +19,7 @@ class ClientController extends Controller
 
     public function update(RegisterRequest $request)
     {
-        $clientLogado = $request->user();
-        $client = $this->clientService->updateClient($request->all(), $clientLogado->id);
+        $client = $this->clientService->updateClient($request->all());
 
         return new ClientResource($client);
     }

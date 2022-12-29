@@ -70,7 +70,7 @@ Route::post('/login', [AuthClientController::class, 'auth']); //Login
 Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegidas
     //CLIENT LOGADO - TOKEN
     Route::get('/auth/me', [AuthClientController::class, 'me']);
-    Route::put('client/update', [ClientController::class, 'update']); //Atualizar dados do cliente
+    Route::post('client/update', [ClientController::class, 'update']); //Atualizar dados do cliente
     //
 
     //HISTORICO
@@ -98,7 +98,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     Route::delete('/clients/roteiros/deslike', [RoteiroLikeController::class, 'deslike']);
     //
 
-
     //ROTEIROS
     Route::resource('clients/roteiros', RoteiroController::class);
     Route::post('clients/roteiros/servicos/attach', [RoteiroController::class, 'attachRoteiroServico']);
@@ -111,9 +110,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     //ROTEIROS PUBLICOS
     Route::get('/roteiros/publicos', [RoteiroController::class, 'roteirosPublicos']); //Roteiros publicos que não pertencem ao cliente logado e que não estão na lista de likes do cliente logado
     //
-
-
-
 
 
     //Route::post('/logout', [AuthClientController::class, 'logout']);

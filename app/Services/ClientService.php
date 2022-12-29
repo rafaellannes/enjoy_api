@@ -19,11 +19,23 @@ class ClientService
         return $this->clientRepository->createClient($data);
     }
 
-    public function updateClient(array $data, int $id)
+    public function updateClient(array $data)
     {
+
+        $client = auth()->user();
+
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
         }
-        return $this->clientRepository->updateClient($data, $id);
+
+        if (isset($data['photo']) && $client->photo) {
+            \Storage::delete($client->photo);
+        }
+
+        if (isset($data['photo'])) {
+            $data['photo'] = $data['photo']->store('clients/profile', 'public');
+        }
+
+        return $this->clientRepository->updateClient($data, $client);
     }
 }

@@ -20,6 +20,7 @@ class Client  extends Authenticatable
         'descontos',
         'sexo',
         'data_nascimento',
+        'photo',
 
     ];
 
