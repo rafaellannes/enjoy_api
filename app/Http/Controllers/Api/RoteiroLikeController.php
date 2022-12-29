@@ -52,16 +52,26 @@ class RoteiroLikeController extends Controller
         return response()->json(['message' => 'Roteiro curtido com sucesso!'], 201);
     }
 
-    public function destroy(Request $request, $uuid)
+    public function deslike(TenantRequest $request)
     {
-        $like = RoteirosLike::where('uuid', $uuid)->first();
+        $validator = \Validator::make($request->all(), [
+            'roteiro_uuid' => 'required | exists:roteiros,uuid',
+        ]);
 
-        if (!$like) {
-            return response()->json(['message' => 'Like não encontrado!'], 404);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
 
-        $like->delete();
+        $roteiro = $this->roteiroService->roteiroByUuid($request->roteiro_uuid);
 
-        return response()->json(['message' => 'Like removido com sucesso!'], 200);
+        if (!$this->roteiroService->checkLikeRoteiro($roteiro)) {
+            return response()->json(['message' => 'Você não curtiu este roteiro!'], 422);
+        }
+
+        $user = auth()->user();
+
+        $user->roteirosLikes()->where('roteiro_id', $roteiro->id)->delete();
+
+        return response()->json(['message' => 'Roteiro descurtido com sucesso!'], 201);
     }
 }

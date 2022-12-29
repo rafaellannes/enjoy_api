@@ -93,6 +93,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     Route::get('/clients/cupons', [CupomController::class, 'cuponsByClient']);
     //
 
+    //ROTEIROS LIKE
+    Route::resource('/clients/roteiros/likes', RoteiroLikeController::class)->only(['index', 'store']);
+    Route::delete('/clients/roteiros/deslike', [RoteiroLikeController::class, 'deslike']);
+    //
+
+
     //ROTEIROS
     Route::resource('clients/roteiros', RoteiroController::class);
     Route::post('clients/roteiros/servicos/attach', [RoteiroController::class, 'attachRoteiroServico']);
@@ -106,9 +112,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     Route::get('/roteiros/publicos', [RoteiroController::class, 'roteirosPublicos']); //Roteiros publicos que não pertencem ao cliente logado e que não estão na lista de likes do cliente logado
     //
 
-    //ROTEIROS LIKE
-    Route::resource('/clients/roteiros/likes', RoteiroLikeController::class)->only(['index', 'store', 'destroy']);
-    //
+
 
 
 
