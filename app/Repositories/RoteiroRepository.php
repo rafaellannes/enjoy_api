@@ -41,11 +41,22 @@ class RoteiroRepository
 
     public function getRoteirosPublicos()
     {
+        //Roteiros publicos que não pertencem ao cliente logado e que não estão na lista de likes do cliente logado
+
         return $this->roteiro
             ->with('servicos')
             ->where('privado', false)
             ->where('client_id', '!=', auth()->user()->id)
+            ->whereDoesntHave('likesRoteiros')
             ->get();
+
+
+        /*    return $this->roteiro
+
+            ->with('servicos')
+            ->where('privado', false)
+            ->where('client_id', '!=', auth()->user()->id)
+            ->get(); */
     }
 
 

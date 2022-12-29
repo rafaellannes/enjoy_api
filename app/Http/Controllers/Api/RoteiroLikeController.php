@@ -27,13 +27,24 @@ class RoteiroLikeController extends Controller
             'roteiro_uuid' => 'required | exists:roteiros,uuid',
         ]);
 
+
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
         $roteiro = $this->roteiroService->roteiroByUuid($request->roteiro_uuid);
 
+
+        if ($this->roteiroService->checkAutorRoteiro($roteiro)) {
+            return response()->json(['message' => 'Você não pode curtir seu próprio roteiro!'], 422);
+        }
+
+        if ($this->roteiroService->checkLikeRoteiro($roteiro)) {
+            return response()->json(['message' => 'Você já curtiu este roteiro!'], 422);
+        }
+
         $user = auth()->user();
+
         $user->roteirosLikes()->create(
             ['roteiro_id' => $roteiro->id,]
         );

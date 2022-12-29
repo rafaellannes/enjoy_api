@@ -16,7 +16,14 @@ class RoteiroService
 
     public function roteirosByClient()
     {
-        return $this->roteiroRepository->roteirosByClient();
+        $roteiros =  $this->roteiroRepository->roteirosByClient();
+
+        $roteiros->map(function ($item) {
+            $item['like'] = false;
+            return $item;
+        });
+
+        return $roteiros;
     }
 
     public function store(array $data)
@@ -114,4 +121,30 @@ class RoteiroService
         return $this->roteiroRepository->getRoteirosPublicos();
     }
 
- }
+    public function roteirosLikeByClient()
+    {
+        $roteiros =  $this->roteiroRepository->roteirosLikeByClient();
+
+        $roteiros->map(function ($item) {
+            $item['like'] = true;
+            return $item;
+        });
+
+        return $roteiros;
+    }
+
+    public function checkAutorRoteiro(Object $roteiro)
+    {
+
+        if ($roteiro->client_id == auth()->user()->id) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function checkLikeRoteiro(Object $roteiro)
+    {
+        return $roteiro->likesRoteiros->where('client_id', auth()->user()->id)->first() ?  true :  false;
+    }
+}

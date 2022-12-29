@@ -103,7 +103,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     //
 
     //ROTEIROS PUBLICOS
-    Route::get('/roteiros/publicos', [RoteiroController::class, 'roteirosPublicos']); //Roteiros publicos (excluindo os do cliente logado)
+    Route::get('/roteiros/publicos', [RoteiroController::class, 'roteirosPublicos']); //Roteiros publicos que não pertencem ao cliente logado e que não estão na lista de likes do cliente logado
     //
 
     //ROTEIROS LIKE

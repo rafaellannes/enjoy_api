@@ -20,8 +20,13 @@ class RoteiroController extends Controller
     }
     public function index(TenantRequest $request)
     {
-        /* return $this->roteiroService->roteirosByClient(); */
-        return RoteiroResource::collection($this->roteiroService->roteirosByClient());
+        $roteirosByClient =  $this->roteiroService->roteirosByClient();
+        $roteirosLikeByClient =  $this->roteiroService->roteirosLikeByClient();
+
+        $roteiros = $roteirosByClient->merge($roteirosLikeByClient);
+
+        /* return $roteiros; */
+        return RoteiroResource::collection($roteiros);
     }
 
     public function store(TenantRequest $request)
