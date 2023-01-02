@@ -14,6 +14,7 @@ class ServicoResource extends JsonResource
      */
     public function toArray($request)
     {
+        /* dd($this['distance']); */
         foreach ($this['img'] as $img) {
             $imgArr[] = [
                 'url' => 'storage/img/servicos/' . $img,
@@ -35,6 +36,9 @@ class ServicoResource extends JsonResource
             ],
             'redes' => RedeSocialResource::collection($this['redes']),
             'tags' => TagResource::collection($this['tags']),
+            'distance' => $this->when($this['distance'], new DistanceResource($this['distance'])),
+
+
         ];
     }
 }

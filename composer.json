@@ -9,10 +9,10 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "joggapp/laravel-google-translate": "^7.0",
+        "kmlaravel/laravel-geographical-calculator": "^2.2",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.5"
-
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -56,6 +56,8 @@ class RoteiroController extends Controller
             return response()->json(['message' => 'Roteiro não encontrado!'], 404);
         }
 
+        /* return $roteiro; */
+
         return new RoteiroResource($roteiro);
     }
 

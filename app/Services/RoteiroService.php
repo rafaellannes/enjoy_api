@@ -6,12 +6,13 @@ use App\Repositories\RoteiroRepository;
 
 class RoteiroService
 {
-    protected $roteiroRepository, $servicoService;
+    protected $roteiroRepository, $servicoService, $locationService;
 
-    public function __construct(RoteiroRepository $roteiroRepository, ServicoService $servicoService)
+    public function __construct(RoteiroRepository $roteiroRepository, ServicoService $servicoService, LocationService $locationService)
     {
         $this->roteiroRepository = $roteiroRepository;
         $this->servicoService = $servicoService;
+        $this->locationService = $locationService;
     }
 
     public function roteirosByClient()
@@ -33,7 +34,27 @@ class RoteiroService
 
     public function roteiroByUuid(string $uuid)
     {
-        return $this->roteiroRepository->roteiroByUuid($uuid);
+        $roteiros =  $this->roteiroRepository->roteiroByUuid($uuid);
+
+        $latTemp = 0;
+        $longTemp = 0;
+        $cont = 0;
+        foreach ($roteiros->servicos as $servico) {
+            $servico->distance = [];
+
+            if ($latTemp == 0 && $longTemp == 0) {
+                $latTemp = $servico->latitude;
+                $longTemp = $servico->longitude;
+            }
+
+            $servico->distance = $this->locationService->getDistance($latTemp, $longTemp, $servico->latitude, $servico->longitude);
+            $latTemp = $servico->latitude;
+            $longTemp = $servico->longitude;
+
+            $cont++;
+        }
+
+        return $roteiros;
     }
 
     public function attachRoteiroServico(array $data)
