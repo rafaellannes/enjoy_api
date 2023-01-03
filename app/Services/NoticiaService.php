@@ -7,59 +7,39 @@ use App\Repositories\NoticiaRepository;
 class NoticiaService
 {
     protected $noticiaRepository;
-    protected $translateService;
 
 
-    public function __construct(NoticiaRepository $noticiaRepository, TranslateService $translateService)
+    public function __construct(NoticiaRepository $noticiaRepository)
     {
         $this->noticiaRepository = $noticiaRepository;
-        $this->translateService = $translateService;
     }
 
 
-    public function getNoticiasAtivas($idioma)
+    public function getNoticiasAtivas()
     {
         $noticias =  $this->noticiaRepository->getNoticiasAtivas();
-
-        foreach ($noticias as $noticia) {
-            $noticia->titulo = $this->translateService->translate($noticia->titulo, $idioma);
-            $noticia->descricao = $this->translateService->translate($noticia->descricao, $idioma);
-        }
-
 
         return $noticias;
     }
 
-    public function getNoticia($uuid, $idioma = null)
+    public function getNoticia($uuid)
     {
         $noticia =  $this->noticiaRepository->getNoticia($uuid);
-
-
-        $noticia->titulo = $this->translateService->translate($noticia->titulo, $idioma);
-        $noticia->descricao = $this->translateService->translate($noticia->descricao, $idioma);
 
         return $noticia;
     }
 
-    public function getNoticiasByCategoria($idCategoria, $idioma)
+    public function getNoticiasByCategoria($idCategoria)
     {
         $noticias =  $this->noticiaRepository->getNoticiasByCategoria($idCategoria);
 
-        foreach ($noticias as $noticia) {
-            $noticia->titulo = $this->translateService->translate($noticia->titulo, $idioma);
-            $noticia->descricao = $this->translateService->translate($noticia->descricao, $idioma);
-        }
         return $noticias;
     }
 
-    public function getNoticiasBySearch($search, $idioma)
+    public function getNoticiasBySearch($search)
     {
         $noticias =  $this->noticiaRepository->getNoticasBySearch($search);
 
-        foreach ($noticias as $noticia) {
-            $noticia->titulo = $this->translateService->translate($noticia->titulo, $idioma);
-            $noticia->descricao = $this->translateService->translate($noticia->descricao, $idioma);
-        }
         return $noticias;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\TranslateService;
 
 class ServicosPorSubcategoriaResource extends JsonResource
 {
@@ -17,7 +18,7 @@ class ServicosPorSubcategoriaResource extends JsonResource
         //$servicos = json_decode(json_encode($this['servicos']), FALSE); // convert to object
 
         return [
-            'descricao' => $this['descricao'],
+            'descricao' => TranslateService::translate($this['descricao']),
             'uuid' => $this['uuid'],
             'servicos' => ServicoResource::collection($this['servicos']),
         ];

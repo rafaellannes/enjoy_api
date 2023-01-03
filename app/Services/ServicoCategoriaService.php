@@ -6,20 +6,17 @@ use App\Repositories\ServicoCategoriaRepository;
 
 class ServicoCategoriaService
 {
-    protected $servicoCategoriaRepository, $translateService;
+    protected $servicoCategoriaRepository;
 
-    public function __construct(ServicoCategoriaRepository $servicoCategoriaRepository, TranslateService $translateService)
+    public function __construct(ServicoCategoriaRepository $servicoCategoriaRepository)
     {
         $this->servicoCategoriaRepository = $servicoCategoriaRepository;
-        $this->translateService = $translateService;
+
     }
 
-    public function getCategoriasAtivas($idioma)
+    public function getCategoriasAtivas()
     {
         $categorias = $this->servicoCategoriaRepository->getCategoriasAtivas();
-        foreach ($categorias as $categoria) {
-            $categoria->descricao = $this->translateService->translate($categoria->descricao, $idioma);
-        }
 
         return $categorias;
     }

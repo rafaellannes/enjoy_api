@@ -19,9 +19,8 @@ class NoticiaCategoriaController extends Controller
 
     public function index(TenantRequest $request)
     {
-        $idioma = $request->idioma ?? 'pt';
 
-        $noticiaCategorias = $this->noticiaCategoriaService->getNoticiaCategorias($idioma);
+        $noticiaCategorias = $this->noticiaCategoriaService->getNoticiaCategorias();
 
         if ($noticiaCategorias->count() == 0) {
             return response()->json(['message' => 'Nenhuma categoria encontrada'], 404);

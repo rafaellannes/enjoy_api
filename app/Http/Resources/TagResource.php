@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\TranslateService;
 
 class TagResource extends JsonResource
 {
@@ -15,7 +16,7 @@ class TagResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'descricao' => $this['descricao'],
+            'descricao' => TranslateService::translate($this['descricao']),
             'icone' => $this['icone']['descricao'],
         ];
     }

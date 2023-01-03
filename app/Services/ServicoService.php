@@ -7,24 +7,17 @@ use App\Repositories\ServicoRepository;
 class ServicoService
 {
     protected $servicoRepository;
-    protected $translateService;
 
 
-    public function __construct(ServicoRepository $servicoRepository, TranslateService $translateService)
+    public function __construct(ServicoRepository $servicoRepository)
     {
         $this->servicoRepository = $servicoRepository;
-        $this->translateService = $translateService;
     }
 
 
     public function getServicosAtivos()
     {
         $servicos =  $this->servicoRepository->getServicosAtivos();
-
-        /*    foreach ($servicos as $servico) {
-            $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
-            $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        } */
 
         return $servicos;
     }
@@ -33,21 +26,12 @@ class ServicoService
     {
         $servico =  $this->servicoRepository->getServico($uuid);
 
-
-        /*  $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
-        $servico->descricao = $this->translateService->translate($servico->descricao, $idioma); */
-
         return $servico;
     }
 
     public function getServicosBySubcategoria($id)
     {
         $servicos =  $this->servicoRepository->getServicosBySubcategoria($id);
-
-        /*  foreach ($servicos as $servico) {
-            $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
-            $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        } */
 
         return $servicos;
     }
@@ -56,10 +40,6 @@ class ServicoService
     {
         $servicos =  $this->servicoRepository->getServicosByCategoria($idCategoria);
 
-        /*     foreach ($servicos as $servico) {
-            $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
-            $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        } */
         return $servicos;
     }
 
@@ -67,22 +47,12 @@ class ServicoService
     {
         $servicos =  $this->servicoRepository->getServicosBySearch($search);
 
-        /*  foreach ($servicos as $servico) {
-            $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
-            $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        } */
-
         return $servicos;
     }
 
     public function getServicosGroupByCategoria()
     {
         $data =  $this->servicoRepository->getServicosGroupByCategoria();
-
-        /*   foreach ($servicos as $servico) {
-            $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
-            $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        } */
 
         //LIMPAR AS SUBCATEGORIAS QUE NÃO TEM SERVIÇOS
         foreach ($data as $key_categoria => $categoria_value) {

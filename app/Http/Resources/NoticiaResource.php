@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Services\TranslateService;
 use Illuminate\Http\Resources\Json\JsonResource;
+
 
 class NoticiaResource extends JsonResource
 {
@@ -24,11 +26,11 @@ class NoticiaResource extends JsonResource
         }
 
         return [
-            'titulo' => $this->titulo,
+            'titulo' => TranslateService::translate($this->titulo),
             'img' => $imgArr,
-            'descricao' => $this->descricao,
+            'descricao' => TranslateService::translate($this->descricao),
             'data_evento' => $this->data_evento,
-            'categoria' => $this->categoria->descricao,
+            'categoria' => TranslateService::translate($this->categoria->descricao),
             'data_publicacao' => $this->created_at,
             'identify' => $this->uuid,
 

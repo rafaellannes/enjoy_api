@@ -21,8 +21,7 @@ class NoticiaController extends Controller
 
     public function index(TenantRequest $request)
     {
-        $idioma = $request->idioma ?? 'pt';
-        $noticias = $this->noticiaService->getNoticiasAtivas($idioma);
+        $noticias = $this->noticiaService->getNoticiasAtivas();
 
         if ($noticias->count() == 0) {
             return response()->json(['message' => 'Nenhuma notícia encontrada'], 404);
@@ -41,8 +40,7 @@ class NoticiaController extends Controller
             return response()->json(['message' => 'Notícia não encontrada'], 404);
         }
 
-        $idioma = $request->idioma ?? 'pt';
-        $noticia = $this->noticiaService->getNoticia($uuid, $idioma);
+        $noticia = $this->noticiaService->getNoticia($uuid);
 
 
         return new NoticiaResource($noticia);
@@ -59,10 +57,9 @@ class NoticiaController extends Controller
             return response()->json(['message' => 'Categoria não encontrada'], 404);
         }
 
-        $idioma = $request->idioma ?? 'pt';
 
         $categoria = $this->noticiaCategoriaService->noticiaCategoriaByUuid($uuidCategoria);
-        $noticias = $this->noticiaService->getNoticiasByCategoria($categoria->id, $idioma);
+        $noticias = $this->noticiaService->getNoticiasByCategoria($categoria->id);
 
         return NoticiaResource::collection($noticias);
     }

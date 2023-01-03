@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Services\TranslateService;
 use Illuminate\Http\Resources\Json\JsonResource;
+
 
 class NoticiaCategoriaResource extends JsonResource
 {
@@ -14,6 +16,9 @@ class NoticiaCategoriaResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'descricao' => TranslateService::translate($this['descricao']),
+            'uuid' => $this['uuid'],
+        ];
     }
 }

@@ -30,10 +30,8 @@ class PesquisaController extends Controller
             return response()->json(['message' => 'Pesquisa inválida'], 400);
         }
 
-        $idioma = $request->idioma ?? 'pt';
-
-        $noticias = $this->noticiaService->getNoticiasBySearch($search, $idioma);
-        $servicos = $this->servicoService->getServicosBySearch($search, $idioma);
+        $noticias = $this->noticiaService->getNoticiasBySearch($search);
+        $servicos = $this->servicoService->getServicosBySearch($search);
 
 
         return response()->json([

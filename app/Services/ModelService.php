@@ -12,14 +12,14 @@ class ModelService
         $this->servicoService = $servicoService;
     }
 
-    public function handleModelByUuid($model, $idioma = null)
+    public function handleModelByUuid($model)
     {
 
         foreach ($model as $item) {
             if ($item->model_type == 'Noticia') {
-                $noticias[] = $this->noticiaService->getNoticia($item->model_uuid, $idioma);
+                $noticias[] = $this->noticiaService->getNoticia($item->model_uuid);
             } else if ($item->model_type == 'Servico') {
-                $servicos[] = $this->servicoService->getServico($item->model_uuid, $idioma);
+                $servicos[] = $this->servicoService->getServico($item->model_uuid);
             }
         }
 

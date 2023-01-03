@@ -8,19 +8,16 @@ class NoticiaCategoriaService
 {
     protected $noticiaCategoriaRepository;
 
-    public function __construct(NoticiaCategoriaRepository $noticiaCategoriaRepository, TranslateService $translateService)
+    public function __construct(NoticiaCategoriaRepository $noticiaCategoriaRepository)
     {
         $this->noticiaCategoriaRepository = $noticiaCategoriaRepository;
-        $this->translateService = $translateService;
+
     }
 
 
-    public function getNoticiaCategorias($idioma)
+    public function getNoticiaCategorias()
     {
         $categorias =  $this->noticiaCategoriaRepository->getNoticiaCategorias();
-        foreach ($categorias as $categoria) {
-            $categoria->descricao = $this->translateService->translate($categoria->descricao, $idioma);
-        }
 
         return $categorias;
     }

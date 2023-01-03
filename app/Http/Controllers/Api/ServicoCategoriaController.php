@@ -20,8 +20,7 @@ class ServicoCategoriaController extends Controller
 
     public function index(TenantRequest $request)
     {
-        $idioma = $request->idioma ?? 'pt';
-        $categorias = $this->servicoCategoriaService->getCategoriasAtivas($idioma);
+        $categorias = $this->servicoCategoriaService->getCategoriasAtivas();
 
         return ServicoCategoriaResource::collection($categorias);
     }

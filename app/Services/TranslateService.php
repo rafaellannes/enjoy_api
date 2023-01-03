@@ -6,13 +6,6 @@ use  GoogleTranslate;
 
 class TranslateService
 {
-    /*  protected $string, $idioma; */
-
-    /*    public function __construct($string, $idioma = null)
-    {
-        $this->string = $string;
-        $this->idioma = $idioma;
-    } */
 
     public static function translate($string)
     {

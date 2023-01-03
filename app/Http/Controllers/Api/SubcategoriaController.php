@@ -31,11 +31,9 @@ class SubcategoriaController extends Controller
         }
 
 
-        $idioma = $request->idioma ?? 'pt';
-
         $categoria = $this->servicoCategoriaService->getCategoriaByUuid($uuid);
 
-        $subcategorias = $this->subcategoriaService->getSubcategoriasByCategoria($categoria->id, $idioma);
+        $subcategorias = $this->subcategoriaService->getSubcategoriasByCategoria($categoria->id);
 
         return SubcategoriaResource::collection($subcategorias);
     }

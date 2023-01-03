@@ -6,12 +6,12 @@ use App\Repositories\SubcategoriaRepository;
 
 class SubcategoriaService
 {
-    protected $subcategoriaRepository, $translateService;
+    protected $subcategoriaRepository;
 
-    public function __construct(SubcategoriaRepository $subcategoriaRepository, TranslateService $translateService)
+    public function __construct(SubcategoriaRepository $subcategoriaRepository)
     {
         $this->subcategoriaRepository = $subcategoriaRepository;
-        $this->translateService = $translateService;
+
     }
 
     public function getSubcategoriaByUuid($uuid)
@@ -21,13 +21,9 @@ class SubcategoriaService
         return $subcategoria;
     }
 
-    public function getSubcategoriasByCategoria($idCategoria, $idioma)
+    public function getSubcategoriasByCategoria($idCategoria)
     {
         $subcategorias = $this->subcategoriaRepository->getSubcategoriasByCategoria($idCategoria);
-
-        foreach ($subcategorias as $subcategoria) {
-            $subcategoria->descricao = $this->translateService->translate($subcategoria->descricao, $idioma);
-        }
 
         return $subcategorias;
     }

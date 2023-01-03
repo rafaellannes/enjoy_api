@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\TranslateService;
 
 class SubcategoriaResource extends JsonResource
 {
@@ -15,7 +16,7 @@ class SubcategoriaResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'descricao' => $this['descricao'],
+            'descricao' => TranslateService::translate($this['descricao']),
             'identify' => $this['uuid'],
         ];
     }

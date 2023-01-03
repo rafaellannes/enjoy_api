@@ -3,6 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\TranslateService;
+
 
 class CupomResource extends JsonResource
 {
@@ -23,7 +25,7 @@ class CupomResource extends JsonResource
 
 
         return [
-            'descricao' => $this['descricao'],
+            'descricao' => TranslateService::translate($this['descricao']),
             'detalhes' => $this['detalhes'],
             'vigencia_inicio' => $this['vigencia_inicio'],
             'vigencia_fim' => $this['vigencia_fim'],
