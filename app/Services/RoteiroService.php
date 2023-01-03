@@ -36,7 +36,7 @@ class RoteiroService
     {
         $roteiros =  $this->roteiroRepository->roteiroByUuid($uuid);
 
-        $latTemp = 0;
+/*         $latTemp = 0;
         $longTemp = 0;
         $cont = 0;
         foreach ($roteiros->servicos as $servico) {
@@ -52,7 +52,7 @@ class RoteiroService
             $longTemp = $servico->longitude;
 
             $cont++;
-        }
+        } */
 
         return $roteiros;
     }

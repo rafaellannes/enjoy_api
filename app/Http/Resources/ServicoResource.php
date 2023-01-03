@@ -36,7 +36,7 @@ class ServicoResource extends JsonResource
             ],
             'redes' => RedeSocialResource::collection($this['redes']),
             'tags' => TagResource::collection($this['tags']),
-            'distance' => $this->when($this['distance'], new DistanceResource($this['distance'])),
+            /* 'distance' => $this->when($this['distance'], new DistanceResource($this['distance'])), */
 
 
         ];
