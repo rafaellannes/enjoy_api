@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Tenant\TenantRequest;
 use App\Http\Resources\HomeServicosResource;
 use App\Http\Resources\ServicoResource;
+use App\Http\Resources\ServicosGroupBySubcategoriaResource;
 use App\Services\ServicoCategoriaService;
 use App\Services\ServicoService;
 use App\Services\SubcategoriaService;
@@ -96,6 +97,6 @@ class ServicoController extends Controller
 
         $servicos = $this->servicoService->getServicosGroupBySubcategoria();
 
-        return $servicos;
+        return ServicosGroupBySubcategoriaResource::collection($servicos);
     }
 }
