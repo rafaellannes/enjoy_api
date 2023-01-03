@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\TranslateService;
 
 class ServicoResource extends JsonResource
 {
@@ -21,8 +22,8 @@ class ServicoResource extends JsonResource
             ];
         }
         return [
-            'titulo' => $this['titulo'],
-            'descricao' => $this['descricao'],
+            'titulo' => TranslateService::translate($this['titulo']),
+            'descricao' => TranslateService::translate($this['descricao']),
             'telefone' => $this['contato'],
             'endereco' => $this['endereco'],
             'img' => $imgArr,
@@ -30,8 +31,8 @@ class ServicoResource extends JsonResource
             'longitude' => $this['longitude'],
             'identify' => $this['uuid'],
             'subcategoria' => [
-                'descricao' => $this['subcategoria']['descricao'],
-                'categoria' => $this['subcategoria']['categoria']['descricao'],
+                'descricao' => TranslateService::translate($this['subcategoria']['descricao']),
+                'categoria' => TranslateService::translate($this['subcategoria']['categoria']['descricao']),
                 'identify' => $this['subcategoria']['uuid'],
             ],
             'redes' => RedeSocialResource::collection($this['redes']),

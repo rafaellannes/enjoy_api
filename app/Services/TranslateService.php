@@ -6,10 +6,20 @@ use  GoogleTranslate;
 
 class TranslateService
 {
-    public function translate($string, $idioma = 'pt')
+    /*  protected $string, $idioma; */
+
+    /*    public function __construct($string, $idioma = null)
+    {
+        $this->string = $string;
+        $this->idioma = $idioma;
+    } */
+
+    public static function translate($string)
     {
 
-        if ($idioma == null) {
+        $idioma = request()->idioma;
+
+        if ($idioma == null || $idioma == '') {
             return $string;
         }
 

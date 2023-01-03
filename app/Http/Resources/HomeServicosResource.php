@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Services\TranslateService;
 
 class HomeServicosResource extends JsonResource
 {
@@ -26,8 +27,8 @@ class HomeServicosResource extends JsonResource
                 }
 
                 $servicos[] = [
-                    'titulo' => $service['titulo'],
-                    'descricao' => $service['descricao'],
+                    'titulo' => TranslateService::translate($service['titulo']),
+                    'descricao' => TranslateService::translate($service['descricao']),
                     'identify' => $service['uuid'],
                     'telefone' => $service['contato'],
                     'endereco' => $service['endereco'],
@@ -35,8 +36,8 @@ class HomeServicosResource extends JsonResource
                     'latitude' => $service['latitude'],
                     'longitude' => $service['longitude'],
                     'subcategoria' => [
-                        'descricao' => $service['subcategoria']['descricao'],
-                        'categoria' => $service['subcategoria']['categoria']['descricao'],
+                        'descricao' => TranslateService::translate($service['subcategoria']['descricao']),
+                        'categoria' => TranslateService::translate($service['subcategoria']['categoria']['descricao']),
                         'identify' => $service['subcategoria']['uuid'],
                     ],
                     'redes' => RedeSocialResource::collection($service['redes']),
@@ -46,7 +47,7 @@ class HomeServicosResource extends JsonResource
         }
 
         return [
-            'descricao' => $this['descricao'],
+            'descricao' => TranslateService::translate($this['descricao']),
             'uuid' => $this['uuid'],
             'icone' => $this['icone']['descricao'],
             'servicos' => $servicos,

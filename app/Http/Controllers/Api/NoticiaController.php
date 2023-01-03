@@ -11,7 +11,7 @@ use App\Services\NoticiaCategoriaService;
 
 class NoticiaController extends Controller
 {
-    protected $noticiaService;
+    protected $noticiaService, $noticiaCategoriaService;
 
     public function __construct(NoticiaService $noticiaService, NoticiaCategoriaService $noticiaCategoriaService)
     {

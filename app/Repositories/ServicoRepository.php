@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ServicoRepository
 {
-    protected $servico, $categoria;
+    protected $servico, $categoria, $subcategoria;
 
     public function __construct(Servico $servico, ServicoCategoria $categoria, Subcategoria $subcategoria)
     {

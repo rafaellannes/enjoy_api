@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class ServicoController extends Controller
 {
-    protected $servicoService, $subcategoriaService;
+    protected $servicoService, $subcategoriaService, $servicoCategoriaService;
 
     public function __construct(ServicoService $servicoService, SubcategoriaService $subcategoriaService, ServicoCategoriaService $servicoCategoriaService)
     {
@@ -24,8 +24,7 @@ class ServicoController extends Controller
 
     public function index(TenantRequest $request)
     {
-        $idioma = $request->idioma ?? 'pt';
-        $servicos = $this->servicoService->getServicosAtivos($idioma);
+        $servicos = $this->servicoService->getServicosAtivos();
 
         return ServicoResource::collection($servicos);
     }
@@ -41,8 +40,7 @@ class ServicoController extends Controller
             return response()->json(['message' => 'UUID inválido'], 400);
         }
 
-        $idioma = $request->idioma ?? 'pt';
-        $servico = $this->servicoService->getServico($uuid, $idioma);
+        $servico = $this->servicoService->getServico($uuid);
 
         return new ServicoResource($servico);
     }
@@ -58,11 +56,9 @@ class ServicoController extends Controller
             return response()->json(['message' => 'UUID inválido'], 400);
         }
 
-        $idioma = $request->idioma ?? 'pt';
-
         $subcategoria = $this->subcategoriaService->getSubcategoriaByUuid($uuid);
 
-        $servicos = $this->servicoService->getServicosBySubcategoria($subcategoria->id, $idioma);
+        $servicos = $this->servicoService->getServicosBySubcategoria($subcategoria->id);
 
         return ServicoResource::collection($servicos);
     }
@@ -78,20 +74,18 @@ class ServicoController extends Controller
             return response()->json(['message' => 'UUID inválido'], 400);
         }
 
-        $idioma = $request->idioma ?? 'pt';
 
         $categoria = $this->servicoCategoriaService->getCategoriaByUuid($uuid);
 
-        $servicos = $this->servicoService->getServicosByCategoria($categoria->id, $idioma);
+        $servicos = $this->servicoService->getServicosByCategoria($categoria->id);
 
         return ServicoResource::collection($servicos);
     }
 
     public function getServicosGroupByCategoria(TenantRequest $request)
     {
-        $idioma = $request->idioma ?? 'pt';
 
-        $servicos = $this->servicoService->getServicosGroupByCategoria($idioma);
+        $servicos = $this->servicoService->getServicosGroupByCategoria();
 
 
         return HomeServicosResource::collection($servicos);
@@ -99,9 +93,8 @@ class ServicoController extends Controller
 
     public function getServicosGroupBySubcategoria(TenantRequest $request)
     {
-        $idioma = $request->idioma ?? 'pt';
 
-        $servicos = $this->servicoService->getServicosGroupBySubcategoria($idioma);
+        $servicos = $this->servicoService->getServicosGroupBySubcategoria();
 
         return $servicos;
     }

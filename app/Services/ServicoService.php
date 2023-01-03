@@ -17,65 +17,65 @@ class ServicoService
     }
 
 
-    public function getServicosAtivos($idioma)
+    public function getServicosAtivos()
     {
         $servicos =  $this->servicoRepository->getServicosAtivos();
 
-        foreach ($servicos as $servico) {
+        /*    foreach ($servicos as $servico) {
             $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
             $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        }
+        } */
 
         return $servicos;
     }
 
-    public function getServico($uuid, $idioma = null)
+    public function getServico($uuid)
     {
         $servico =  $this->servicoRepository->getServico($uuid);
 
 
-        $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
-        $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
+        /*  $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
+        $servico->descricao = $this->translateService->translate($servico->descricao, $idioma); */
 
         return $servico;
     }
 
-    public function getServicosBySubcategoria($id, $idioma)
+    public function getServicosBySubcategoria($id)
     {
         $servicos =  $this->servicoRepository->getServicosBySubcategoria($id);
 
-        foreach ($servicos as $servico) {
+        /*  foreach ($servicos as $servico) {
             $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
             $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        }
+        } */
 
         return $servicos;
     }
 
-    public function getServicosByCategoria($idCategoria, $idioma)
+    public function getServicosByCategoria($idCategoria)
     {
         $servicos =  $this->servicoRepository->getServicosByCategoria($idCategoria);
 
-        foreach ($servicos as $servico) {
+        /*     foreach ($servicos as $servico) {
             $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
             $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        }
+        } */
         return $servicos;
     }
 
-    public function getServicosBySearch($search, $idioma)
+    public function getServicosBySearch($search)
     {
         $servicos =  $this->servicoRepository->getServicosBySearch($search);
 
-        foreach ($servicos as $servico) {
+        /*  foreach ($servicos as $servico) {
             $servico->titulo = $this->translateService->translate($servico->titulo, $idioma);
             $servico->descricao = $this->translateService->translate($servico->descricao, $idioma);
-        }
+        } */
 
         return $servicos;
     }
 
-    public function getServicosGroupByCategoria($idioma)
+    public function getServicosGroupByCategoria()
     {
         $data =  $this->servicoRepository->getServicosGroupByCategoria();
 
