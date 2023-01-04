@@ -28,12 +28,13 @@ class RegisterRequest extends FormRequest
         return  [
             'name' => ['required', 'min:3', 'max:100'],
             'email' => 'required|email|unique:clients,email,' . $id,
-            'password' => ['sometimes', 'min:6', 'max:80'],
+            'password' => ['sometimes', 'min:6', 'max:20'],
             'notificacao' => ['sometimes', 'boolean'],
             'descontos' => ['sometimes', 'boolean'],
             'sexo' => ['sometimes', 'in:M,F,O'],
             'data_nascimento' => ['sometimes', 'date'],
             'photo' => ['sometimes', 'image', 'max:1024', 'mimes:png,jpg,jpeg'],
+            'telefone' => ['nullable', 'min:10', 'max:191']
         ];
     }
 }

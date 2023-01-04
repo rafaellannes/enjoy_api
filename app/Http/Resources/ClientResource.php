@@ -22,6 +22,7 @@ class ClientResource extends JsonResource
             "photo" =>   $this->photo ? url("storage/{$this->photo}") : null,
             "sexo" => $this->sexo,
             'data_nascimento' => $this->data_nascimento,
+            'telefone' => $this->telefone,
             'favoritos' => ClientFavoritosResource::collection($this->favoritos),
         ];
     }
