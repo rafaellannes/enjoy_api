@@ -21,7 +21,8 @@ use App\Http\Controllers\Api\{
 
 use App\Http\Controllers\Api\Auth\{
     RegisterController,
-    AuthClientController
+    AuthClientController,
+    ForgotPasswordController
 };
 
 
@@ -66,6 +67,12 @@ Route::get('/pesquisa/{filter}', [PesquisaController::class, 'search']);
 Route::post('/register', [RegisterController::class, 'register']); //Registrar
 Route::post('/login', [AuthClientController::class, 'auth']); //Login
 //
+
+//RESET PASSWORD
+Route::post('password/email', [ForgotPasswordController::class, 'forgot']);
+Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
+//
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegidas
     //CLIENT LOGADO - TOKEN

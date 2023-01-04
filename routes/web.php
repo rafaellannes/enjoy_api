@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
-
 });
 
-Route::get('/servicos/group/categoria', [ServicoController::class, 'getServicosGroupByCategoria']);
+Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
