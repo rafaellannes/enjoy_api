@@ -15,7 +15,10 @@ class ServicoCategoriaRepository
 
     public function getCategoriasAtivas()
     {
-        return $this->servicoCategoria->where('ativo', true)->get();
+        return $this->servicoCategoria
+            ->whereHas('subcategorias')
+            ->where('ativo', true)
+            ->get();
     }
 
     public function getCategoriaByUuid($uuid)
