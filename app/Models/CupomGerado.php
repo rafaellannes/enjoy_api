@@ -15,7 +15,8 @@ class CupomGerado extends Model
         'data_resgate',
         'usado',
         'data_usado',
-        'qr_code'
+        'qr_code',
+        'uuid'
     ];
 
     public function cupom()

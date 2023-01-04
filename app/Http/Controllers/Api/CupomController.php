@@ -62,12 +62,14 @@ class CupomController extends Controller
             return response()->json(['message' => 'Você já resgatou esse cupom'], 400);
         }
 
+        $uuid = \Str::uuid();
 
         $cupomGerado = $cupom->gerados()->create([
             'client_id' => $user->id,
             'cupom_id' => $cupom->id,
             'data_resgate' => now(),
-            'qr_code' => env('QRCODE_URL') . $cupom->uuid //gerar link qr code
+            'uuid' => $uuid,
+            'qr_code' => env('QRCODE_URL') . $uuid
         ]);
 
         return response()->json(

@@ -11,7 +11,6 @@ class ServicoCategoriaService
     public function __construct(ServicoCategoriaRepository $servicoCategoriaRepository)
     {
         $this->servicoCategoriaRepository = $servicoCategoriaRepository;
-
     }
 
     public function getCategoriasAtivas()
