@@ -43,20 +43,18 @@ class RoteiroRepository
     {
         //Roteiros publicos que não pertencem ao cliente logado e que não estão na lista de likes do cliente logado
 
-        return $this->roteiro
+        $roteiros =  $this->roteiro
             ->with('servicos')
             ->where('privado', false)
             ->where('client_id', '!=', auth()->user()->id)
-            ->whereDoesntHave('likesRoteiros')
+            ->whereDoesntHave('likesRoteiros', function ($query) {
+                $query->where('client_id', auth()->user()->id);
+            })
+            ->withCount('likesRoteiros')
+            ->orderBy('likes_roteiros_count', 'desc')
             ->get();
 
-
-        /*    return $this->roteiro
-
-            ->with('servicos')
-            ->where('privado', false)
-            ->where('client_id', '!=', auth()->user()->id)
-            ->get(); */
+        return $roteiros;
     }
 
 
@@ -67,6 +65,8 @@ class RoteiroRepository
                 $query->where('client_id', auth()->user()->id);
             })
             ->with('servicos')
+            ->withCount('likesRoteiros')
+            ->orderBy('likes_roteiros_count', 'desc')
             ->get();
     }
 }

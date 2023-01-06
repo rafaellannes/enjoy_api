@@ -26,6 +26,7 @@ class RoteiroController extends Controller
         $roteiros = $roteirosByClient->merge($roteirosLikeByClient);
 
         /* return $roteiros; */
+
         return RoteiroResource::collection($roteiros);
     }
 
@@ -168,7 +169,12 @@ class RoteiroController extends Controller
     }
 
     public function roteirosPublicos(TenantRequest $request)
+
     {
-        return RoteiroResource::collection($this->roteiroService->roteirosPublicos());
+        $roteiros = $this->roteiroService->roteirosPublicos();
+
+       /*  return $roteiros; */
+
+        return RoteiroResource::collection($roteiros);
     }
 }

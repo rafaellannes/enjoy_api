@@ -23,8 +23,10 @@ class RoteiroResource extends JsonResource
             'uuid' => $this['uuid'],
             'created_at' => $this['created_at'],
             'like' => $this['like'] ?? false,
+            'likes_roteiros_count' => $this['likes_roteiros_count'],
             /* 'servicos' => ServicoResource::collection($this['servicos']), */
             'servicos' => $this->when($this->relationLoaded('servicos'), ServicoResource::collection($this['servicos'])),
+
         ];
     }
 }
