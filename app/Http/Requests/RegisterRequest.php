@@ -28,7 +28,7 @@ class RegisterRequest extends FormRequest
         return  [
             'name' => ['required', 'min:3', 'max:100'],
             'email' => 'required|email|unique:clients,email,' . $id,
-            'password' => ['sometimes', 'min:6', 'max:20'],
+            'password' => ['sometimes', 'min:6', 'max:191'],
             'notificacao' => ['sometimes', 'boolean'],
             'descontos' => ['sometimes', 'boolean'],
             'sexo' => ['sometimes', 'in:M,F,O'],
