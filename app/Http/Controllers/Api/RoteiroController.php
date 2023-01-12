@@ -72,7 +72,7 @@ class RoteiroController extends Controller
 
         $validator = \Validator::make($request->all(), [
             'titulo' => ['required', 'max:255', 'min:3', 'string', new UniqueTenant('roteiros', $roteiro->id)],
-            'descricao' => 'sometimes | max:255 | min:3 | string',
+            'descricao' => 'nullable | max:255 | min:3 | string',
             'privado' => 'required | boolean',
         ]);
 
@@ -173,7 +173,7 @@ class RoteiroController extends Controller
     {
         $roteiros = $this->roteiroService->roteirosPublicos();
 
-       /*  return $roteiros; */
+        /*  return $roteiros; */
 
         return RoteiroResource::collection($roteiros);
     }
