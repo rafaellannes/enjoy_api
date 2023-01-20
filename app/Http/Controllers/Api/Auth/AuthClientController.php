@@ -15,7 +15,8 @@ class AuthClientController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'device_name' => 'required'
+            'device_name' => 'required',
+            'token_firebase' => 'required'
         ]);
 
         $client = Client::where('email', $request->email)->first();
@@ -25,6 +26,12 @@ class AuthClientController extends Controller
                 'message' => 'Credenciais Inválidas'
             ], 404);
         }
+
+        //ATUALIZAÇÃO TOKEN FIREBASE
+        $client->token_firebase = $request->token_firebase;
+        $client->token_data = now();
+        $client->save();
+        //
 
         $token = $client->createToken($request->device_name)->plainTextToken;
 
