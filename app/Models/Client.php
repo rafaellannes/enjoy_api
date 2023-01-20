@@ -22,7 +22,10 @@ class Client  extends Authenticatable
         'sexo',
         'data_nascimento',
         'photo',
-        'telefone'
+        'telefone',
+        'plataforma',
+        'token_firebase',
+        'token_data',
 
     ];
 
