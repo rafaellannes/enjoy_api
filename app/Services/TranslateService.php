@@ -10,7 +10,9 @@ class TranslateService
     public static function translate($string)
     {
 
+
         $idioma = request()->idioma;
+
 
         if ($idioma == null || $idioma == '') {
             return $string;
