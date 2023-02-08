@@ -30,6 +30,9 @@ class ServicoResource extends JsonResource
             'latitude' => $this['latitude'],
             'longitude' => $this['longitude'],
             'identify' => $this['uuid'],
+            'data_hora' => $this->whenPivotLoaded('roteiros_servicos', function () {
+                return $this->pivot->data_hora;
+            }),
             'subcategoria' => [
                 'descricao' => TranslateService::translate($this['subcategoria']['descricao']),
                 'categoria' => TranslateService::translate($this['subcategoria']['categoria']['descricao']),

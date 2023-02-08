@@ -36,23 +36,6 @@ class RoteiroService
     {
         $roteiros =  $this->roteiroRepository->roteiroByUuid($uuid);
 
-/*         $latTemp = 0;
-        $longTemp = 0;
-        $cont = 0;
-        foreach ($roteiros->servicos as $servico) {
-            $servico->distance = [];
-
-            if ($latTemp == 0 && $longTemp == 0) {
-                $latTemp = $servico->latitude;
-                $longTemp = $servico->longitude;
-            }
-
-            $servico->distance = $this->locationService->getDistance($latTemp, $longTemp, $servico->latitude, $servico->longitude);
-            $latTemp = $servico->latitude;
-            $longTemp = $servico->longitude;
-
-            $cont++;
-        } */
 
         return $roteiros;
     }
@@ -70,7 +53,14 @@ class RoteiroService
             return false;
         }
 
-        $servico->roteiros()->attach($roteiro->id, ['created_at' => now(), 'updated_at' => now()]);
+        $servico->roteiros()->attach(
+            $roteiro->id,
+            [
+                'created_at' => now(),
+                'updated_at' => now(),
+                'data_hora' => $data['data_hora']
+            ]
+        );
 
         return true;
 

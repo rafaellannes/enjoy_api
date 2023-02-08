@@ -22,7 +22,7 @@ class Roteiro extends Model
 
     public function servicos()
     {
-        return $this->belongsToMany(Servico::class, 'roteiros_servicos', 'roteiro_id', 'servico_id')->withPivot('ordem');
+        return $this->belongsToMany(Servico::class, 'roteiros_servicos', 'roteiro_id', 'servico_id')->withPivot('data_hora');
     }
 
     public function client()

@@ -36,7 +36,9 @@ class RoteiroRepository
     public function roteiroByUuid(string $uuid)
     {
         return $this->roteiro
-            ->with('servicos')
+            ->with(['servicos' => function ($q) {
+                $q->orderBy('data_hora', 'asc');
+            }])
             ->where('uuid', $uuid)
             ->first();
     }

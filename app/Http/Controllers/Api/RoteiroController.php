@@ -105,6 +105,7 @@ class RoteiroController extends Controller
         $validator = \Validator::make($request->all(), [
             'roteiro_uuid' => 'required | exists:roteiros,uuid',
             'servico_uuid' => 'required | exists:servicos,uuid',
+            'data_hora' => 'required | date_format:Y-m-d H:i',
         ]);
 
         if ($validator->fails()) {
