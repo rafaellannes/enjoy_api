@@ -150,7 +150,8 @@ class RoteiroController extends Controller
 
         $servicosPorSubcategoria =  $this->roteiroService->servicosAvailableByRoteiro($uuidRoteiro);
 
-        /* return $servicosPorSubcategoria; */
+
+       /*  return $servicosPorSubcategoria; */
         return ServicosPorSubcategoriaResource::collection($servicosPorSubcategoria);
     }
 

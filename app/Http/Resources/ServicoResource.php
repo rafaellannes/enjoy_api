@@ -15,13 +15,14 @@ class ServicoResource extends JsonResource
      */
     public function toArray($request)
     {
+
         /* dd($this['distance']); */
         foreach ($this['img'] as $img) {
             $imgArr[] = [
                 'url' => 'storage/img/servicos/' . $img,
             ];
         }
-        return [
+        $array =  [
             'titulo' => TranslateService::translate($this['titulo']),
             'descricao' => TranslateService::translate($this['descricao']),
             'telefone' => $this['contato'],
@@ -30,9 +31,6 @@ class ServicoResource extends JsonResource
             'latitude' => $this['latitude'],
             'longitude' => $this['longitude'],
             'identify' => $this['uuid'],
-            'data_hora' => $this->whenPivotLoaded('roteiros_servicos', function () {
-                return $this->pivot->data_hora;
-            }),
             'subcategoria' => [
                 'descricao' => TranslateService::translate($this['subcategoria']['descricao']),
                 'categoria' => TranslateService::translate($this['subcategoria']['categoria']['descricao']),
@@ -41,8 +39,12 @@ class ServicoResource extends JsonResource
             'redes' => RedeSocialResource::collection($this['redes']),
             'tags' => TagResource::collection($this['tags']),
             /* 'distance' => $this->when($this['distance'], new DistanceResource($this['distance'])), */
-
-
         ];
+
+        if (isset($this->pivot)) {
+            $array['data_hora'] = $this->when($this->pivot, $this->pivot['data_hora']);
+        }
+
+        return $array;
     }
 }

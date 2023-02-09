@@ -35,12 +35,14 @@ class RoteiroRepository
 
     public function roteiroByUuid(string $uuid)
     {
-        return $this->roteiro
+        $roteiro  = $this->roteiro
             ->with(['servicos' => function ($q) {
                 $q->orderBy('data_hora', 'asc');
             }])
             ->where('uuid', $uuid)
             ->first();
+
+        return $roteiro;
     }
 
     public function getRoteirosPublicos()

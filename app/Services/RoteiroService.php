@@ -85,7 +85,9 @@ class RoteiroService
 
     public function servicosAvailableByRoteiro($uuidRoteiro)
     {
+
         $roteiro = $this->roteiroRepository->roteiroByUuid($uuidRoteiro);
+
 
         /*   return $roteiro->servicos; */
 
