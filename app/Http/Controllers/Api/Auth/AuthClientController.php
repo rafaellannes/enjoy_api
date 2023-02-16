@@ -16,7 +16,8 @@ class AuthClientController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'device_name' => 'required',
-            'token_firebase' => 'required'
+            'token_firebase' => 'required',
+            'plataforma' => 'required | string | max:191'
         ]);
 
         $client = Client::where('email', $request->email)->first();
@@ -27,9 +28,10 @@ class AuthClientController extends Controller
             ], 404);
         }
 
-        //ATUALIZAÇÃO TOKEN FIREBASE
+        //ATUALIZAÇÃO TOKEN FIREBASE - PLATAFORMA
         $client->token_firebase = $request->token_firebase;
         $client->token_data = now();
+        $client->plataforma = $request->plataforma;
         $client->save();
         //
 

@@ -34,7 +34,8 @@ class RegisterRequest extends FormRequest
             'sexo' => ['sometimes', 'in:M,F,O'],
             'data_nascimento' => ['sometimes', 'date'],
             'photo' => ['sometimes', 'image', 'max:1024', 'mimes:png,jpg,jpeg'],
-            'telefone' => ['nullable', 'min:10', 'max:191']
+            'telefone' => ['nullable', 'min:10', 'max:191'],
+            'plataforma' =>['nullable', 'string', 'max:191'],
         ];
     }
 }
