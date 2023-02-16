@@ -75,6 +75,10 @@ Route::post('password/reset', [ForgotPasswordController::class, 'reset']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegidas
+
+    Route::get('/servico/{uuid}/acesso', [ServicoController::class, 'acessoServico']);
+
+
     //CLIENT LOGADO - TOKEN
     Route::get('/auth/me', [AuthClientController::class, 'me']);
     Route::post('client/update', [ClientController::class, 'update']); //Atualizar dados do cliente

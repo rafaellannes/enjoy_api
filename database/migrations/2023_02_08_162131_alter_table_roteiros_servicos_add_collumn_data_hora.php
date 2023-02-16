@@ -25,6 +25,8 @@ class AlterTableRoteirosServicosAddCollumnDataHora extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('roteiros_servicos', function (Blueprint $table) {
+            $table->dropColumn('data_hora');
+        });
     }
 }

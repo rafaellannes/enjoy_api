@@ -26,6 +26,10 @@ class Servico extends Model
         'uuid',
     ];
 
+    protected $casts = [
+        'img' => 'array',
+    ];
+
     public function subcategoria()
     {
         return $this->belongsTo(Subcategoria::class);
@@ -61,7 +65,8 @@ class Servico extends Model
         return $this->belongsToMany(Roteiro::class, 'roteiros_servicos', 'servico_id', 'roteiro_id')->withPivot('ordem');
     }
 
-    protected $casts = [
-        'img' => 'array',
-    ];
+    public function acessos()
+    {
+        return $this->hasMany(AcessoServico::class);
+    }
 }

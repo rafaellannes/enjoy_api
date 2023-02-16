@@ -11,6 +11,7 @@ use App\Services\ServicoCategoriaService;
 use App\Services\ServicoService;
 use App\Services\SubcategoriaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServicoController extends Controller
 {
@@ -43,8 +44,29 @@ class ServicoController extends Controller
 
         $servico = $this->servicoService->getServico($uuid);
 
+
         return new ServicoResource($servico);
     }
+
+    public function acessoServico(TenantRequest $request, $uuid)
+    {
+        $validator = \Validator::make(['uuid' => $uuid], [
+            'uuid' => 'required|uuid|exists:servicos,uuid'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => 'UUID inválido'], 400);
+        }
+
+        $servico = $this->servicoService->getServico($uuid);
+
+        $servico->acessos()->create([
+            'cliente_id' => Auth::user()->id
+        ]);
+
+        return response()->json(['message' => 'Acesso registrado com sucesso'], 200);
+    }
+
 
     public function getServicosBySubcategoria(TenantRequest $request, $uuid)
     {
