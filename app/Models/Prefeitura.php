@@ -17,6 +17,11 @@ class Prefeitura extends Model
         'created_at' => 'date:d/m/Y',
     ];
 
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+
     /*    public function clients()
     {
         return $this->hasMany(Client::class);

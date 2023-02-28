@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class PrefeituraController extends Controller
 {
+    protected $prefeituraService;
+
     public function __construct(PrefeituraService $prefeituraService)
     {
         $this->prefeituraService = $prefeituraService;

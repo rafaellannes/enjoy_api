@@ -17,6 +17,8 @@ class PrefeituraResource extends JsonResource
         return [
             'descricao' => $this->descricao,
             'identify' => $this->uuid,
+            'estado' => $this->estado->descricao,
+            'sigla' => $this->estado->sigla,
         ];
     }
 }

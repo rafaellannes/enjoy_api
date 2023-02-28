@@ -6,6 +6,8 @@ use App\Models\Prefeitura;
 
 class PrefeituraRepository
 {
+    protected $prefeitura;
+
     public function __construct(Prefeitura $prefeitura)
     {
         $this->prefeitura = $prefeitura;
@@ -13,6 +15,6 @@ class PrefeituraRepository
 
     public function all()
     {
-        return $this->prefeitura->all();
+        return $this->prefeitura->with('estado')->get();
     }
 }
