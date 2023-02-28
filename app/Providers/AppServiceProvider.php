@@ -21,7 +21,7 @@ use App\Observers\{
     RoteiroLikeObserver,
     RoteiroObserver
 };
-
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -43,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         Historico::observe(HistoricoObserver::class);
         Favorito::observe(FavoritoObserver::class);
         Roteiro::observe(RoteiroObserver::class);
