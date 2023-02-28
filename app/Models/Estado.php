@@ -10,4 +10,9 @@ class Estado extends Model
     use HasFactory;
 
     protected $fillable = ['descricao', 'sigla'];
+
+    public function prefeituras()
+    {
+        return $this->hasMany(Prefeitura::class);
+    }
 }

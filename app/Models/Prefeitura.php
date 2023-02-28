@@ -19,7 +19,7 @@ class Prefeitura extends Model
 
     public function estado()
     {
-        return $this->belongsTo(Estado::class);
+        return $this->belongsTo(Estado::class)->orderBy('sigla', 'desc');
     }
 
     /*    public function clients()

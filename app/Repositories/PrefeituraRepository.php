@@ -15,6 +15,10 @@ class PrefeituraRepository
 
     public function all()
     {
-        return $this->prefeitura->with('estado')->get();
+        $prefeituras = $this->prefeitura->with('estado')
+            ->get()
+            ->sortBy('estado.sigla');
+
+        return $prefeituras;
     }
 }
