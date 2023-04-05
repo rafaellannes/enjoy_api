@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-use App\Tenant\Traits\TenantTrait;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    use HasFactory, TenantTrait;
+    use HasFactory;
 
-    protected $fillable = ['descricao', 'prefeitura_id', 'icone_id', 'ativo'];
+    protected $fillable = ['descricao', 'icone_id', 'ativo'];
 
     public function tagsAtivas()
     {
