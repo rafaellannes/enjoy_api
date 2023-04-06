@@ -71,21 +71,30 @@ class ServicoRepository
     public function getServicosGroupByCategoria()
     {
 
-        $result =  $this->categoria
-            ->with('icone', 'subcategorias.servicosLimitados.tags.icone', 'subcategorias.servicosLimitados.redes', 'subcategorias.servicosLimitados.subcategoria.categoria') // Pega as categorias com as subcategorias e os serviços limitados a 3
-            ->whereHas('subcategorias', function ($q) {
-                $q->whereHas('servicos', function ($q) {
-                    $q->where('ativo', true);
-                });
-            })
-            ->get()
-            ->take(2) // Pega apenas as duas primeiras categorias
-            ->toArray();
+        $categorias = $this->categoria
+            ->with('icone')
+            ->whereHas('subcategorias.servicos')
+            ->take(2)
+            ->get();
 
+        foreach ($categorias as $key => $categoria) {
+            $categorias[$key]['subcategorias'] = $categoria->subcategorias()
+                ->where('ativo', true)
+                ->with(['servicos' => function ($query) {
+                    $query->where('ativo', true)
+                        ->take(4);
+                }])
+                ->get()
+                ->filter(function ($subcategoria) {
+                    return $subcategoria->servicos->isNotEmpty();
+                })
+                ->values();
+        }
 
-
-        return $result;
+        return $categorias;
     }
+
+
 
     public function getServicosGroupBySubcategoria()
     {
@@ -96,8 +105,6 @@ class ServicoRepository
             ->with('servicos.tags.icone', 'servicos.redes', 'servicos.subcategoria.categoria')
             ->get()
             ->toArray();
-
-
 
         return $result;
     }

@@ -16,9 +16,8 @@ class HomeServicosResource extends JsonResource
     public function toArray($request)
     {
 
-
         foreach ($this['subcategorias'] as $subcategoria) {
-            foreach ($subcategoria['servicos_limitados'] as $service) {
+            foreach ($subcategoria['servicos'] as $service) {
                 $imgArr = [];
                 foreach ($service['img'] as $img) {
                     $imgArr[] = [

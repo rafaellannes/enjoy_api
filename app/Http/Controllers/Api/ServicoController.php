@@ -110,7 +110,7 @@ class ServicoController extends Controller
 
         $servicos = $this->servicoService->getServicosGroupByCategoria();
 
-
+        /*  return $servicos; */
         return HomeServicosResource::collection($servicos);
     }
 

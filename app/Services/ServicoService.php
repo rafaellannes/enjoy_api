@@ -55,15 +55,15 @@ class ServicoService
         $data =  $this->servicoRepository->getServicosGroupByCategoria();
 
         //LIMPAR AS SUBCATEGORIAS QUE NÃO TEM SERVIÇOS
-        foreach ($data as $key_categoria => $categoria_value) {
+    /*     foreach ($data as $key_categoria => $categoria_value) {
             foreach ($data[$key_categoria]['subcategorias'] as $key_subcategoria => $value_subcategoria) {
-                if ($value_subcategoria['servicos_limitados'] == null) {
+                if ($value_subcategoria['servicos'] == null) {
                     unset($data[$key_categoria]['subcategorias'][$key_subcategoria]);
 
                     $data[$key_categoria]['subcategorias'] = array_values($data[$key_categoria]['subcategorias']);
                 }
             }
-        }
+        } */
 
         return $data;
     }
