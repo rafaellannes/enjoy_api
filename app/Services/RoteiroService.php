@@ -85,24 +85,19 @@ class RoteiroService
 
     public function servicosAvailableByRoteiro($uuidRoteiro)
     {
-
         $roteiro = $this->roteiroRepository->roteiroByUuid($uuidRoteiro);
-
-
-        /*   return $roteiro->servicos; */
 
         $servicosRecomendadosBySubcategoria = $this->servicoService->getServicosGroupBySubcategoria();
 
-        /*  return $servicosRecomendadosBySubcategoria; */
+        // Excluir os serviços que já estão no roteiro em cada subcategoria
+        foreach ($servicosRecomendadosBySubcategoria as $keySubCategoria => &$subcategoria) {
+            $subcategoria['servicos'] = array_filter($subcategoria['servicos'], function ($servico) use ($roteiro) {
+                return !$roteiro->servicos->contains($servico['id']);
+            });
 
-        //Excluir os servicos que já estão no roteiro
-        foreach ($servicosRecomendadosBySubcategoria as $keySubCategoria => $subcategoria) {
-            foreach ($subcategoria['servicos'] as $key => $servico) {
-
-                if ($roteiro->servicos->contains($servico['id'])) {
-                    unset($servicosRecomendadosBySubcategoria[$keySubCategoria]['servicos'][$key]);
-                    $servicosRecomendadosBySubcategoria[$keySubCategoria]['servicos'] = array_values($servicosRecomendadosBySubcategoria[$keySubCategoria]['servicos']);
-                }
+            // Remover subcategoria vazia
+            if (empty($subcategoria['servicos'])) {
+                unset($servicosRecomendadosBySubcategoria[$keySubCategoria]);
             }
         }
 
