@@ -16,7 +16,10 @@ class NoticiaRepository
 
     public function getNoticiasAtivas()
     {
-        return $this->noticia->where('ativo', true)->paginate(3);
+        return $this->noticia
+            ->where('ativo', true)
+            ->latest()
+            ->paginate(5);
     }
 
     public function getNoticia($uuid)

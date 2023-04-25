@@ -22,7 +22,9 @@ class ServicoRepository
     {
         return $this->servico
             ->with('subcategoria.categoria', 'redes', 'tags.icone')
-            ->where('ativo', true)->paginate(3);
+            ->where('ativo', true)
+            ->latest()
+            ->paginate(5);
     }
 
     public function getServico($uuid)
@@ -38,7 +40,9 @@ class ServicoRepository
         return $this->servico
             ->with('subcategoria.categoria', 'redes', 'tags.icone')
             ->where('ativo', true)
-            ->where('subcategoria_id', $idSubcategoria)->paginate(3);
+            ->where('subcategoria_id', $idSubcategoria)
+            ->latest()
+            ->paginate(5);
     }
 
     public function getServicosByCategoria($idCategoria)
@@ -48,7 +52,9 @@ class ServicoRepository
             ->where('ativo', true)
             ->whereHas('subcategoria', function ($query) use ($idCategoria) {
                 $query->where('categoria_id', $idCategoria);
-            })->paginate(3);
+            })
+            ->latest()
+            ->paginate(5);
     }
 
     public function getServicosBySearch($search)
