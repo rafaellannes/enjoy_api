@@ -18,7 +18,8 @@ class RoteiroRepository
         return $this->roteiro->where('client_id', auth()->user()->id)
             ->with('servicos')
             ->withCount('likesRoteiros')
-            ->orderBy('likes_roteiros_count', 'desc', 'created_at', 'desc')
+            ->orderBy('likes_roteiros_count', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 
@@ -73,6 +74,7 @@ class RoteiroRepository
             ->with('servicos')
             ->withCount('likesRoteiros')
             ->orderBy('likes_roteiros_count', 'desc')
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 }
