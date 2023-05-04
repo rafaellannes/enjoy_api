@@ -18,7 +18,7 @@ class RoteiroLikeController extends Controller
 
     public function index(TenantRequest $request)
     {
-        return $this->roteiroService->likesByClient();
+       /*  return $this->roteiroService->likesByClient(); */
     }
 
     public function store(TenantRequest $request)
