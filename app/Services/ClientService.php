@@ -38,4 +38,18 @@ class ClientService
 
         return $this->clientRepository->updateClient($data, $client);
     }
+
+   
+    public function removeClient(array $data)
+    {
+        $client = auth()->user();
+
+        if (isset($data['photo']) && $client->photo) {
+            \Storage::delete($client->photo);
+        }
+
+        return $this->clientRepository->removeClient($client);
+    }
+
+    
 }

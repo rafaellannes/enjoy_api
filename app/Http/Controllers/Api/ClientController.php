@@ -23,4 +23,11 @@ class ClientController extends Controller
 
         return new ClientResource($client);
     }
+
+    public function remove(Request $request)
+    {
+        $client = $this->clientService->removeClient($request->all());
+
+        return new ClientResource($client);
+    }
 }

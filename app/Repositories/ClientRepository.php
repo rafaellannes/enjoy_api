@@ -24,4 +24,11 @@ class ClientRepository
 
         return $client;
     }
+
+    public function removeClient(Client $client)
+    {
+        $client->delete();
+
+        return $client;
+    }
 }

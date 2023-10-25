@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () { //Rotas protegida
     //CLIENT LOGADO - TOKEN
     Route::get('/auth/me', [AuthClientController::class, 'me']);
     Route::post('client/update', [ClientController::class, 'update']); //Atualizar dados do cliente
+    Route::post('client/remove', [ClientController::class, 'remove']); //Remover cliente
     //
 
     //HISTORICO
