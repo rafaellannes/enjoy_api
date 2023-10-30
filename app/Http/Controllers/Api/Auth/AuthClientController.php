@@ -22,7 +22,7 @@ class AuthClientController extends Controller
 
         $client = Client::where('email', $request->email)->first();
 
-        if($request->plataform == 'email'){
+        if($request->plataforma == "Email"){
             if ($client && $client->plataforma != $request->plataforma) {
                 return response()->json([
                     'message' => 'Você se cadastrou pelo '.$client->plataforma.', faça o login por ela.',
