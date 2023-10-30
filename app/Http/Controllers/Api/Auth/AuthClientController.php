@@ -22,6 +22,13 @@ class AuthClientController extends Controller
 
         $client = Client::where('email', $request->email)->first();
 
+        if ($client && $client->plataforma != $request->plataforma) {
+            return response()->json([
+                'message' => 'Você se cadastrou pelo '.$client->plataforma.', faça o login por ela.',
+                'plataforma' => $client->plataforma
+            ], 403);
+        }       
+
         if (!$client || !Hash::check($request->password, $client->password)) {
             return response()->json([
                 'message' => 'Credenciais Inválidas'
